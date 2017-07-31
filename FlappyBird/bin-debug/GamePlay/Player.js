@@ -1,0 +1,58 @@
+var __reflect = (this && this.__reflect) || function (p, c, t) {
+    p.__class__ = c, t ? t.push(c) : t = [c], p.__types__ = p.__types__ ? t.concat(p.__types__) : t;
+};
+var Player = (function () {
+    // 物理系统
+    //private m_body : p2.Body;
+    function Player() {
+        this.m_mcName = "BirdYellow";
+        this.m_mcTexturePath = "resource/assets/animation/BirdYellow.png";
+        this.m_mcJsonPath = "resource/assets/animation/BirdYellow.json";
+    }
+    Player.prototype.Init = function () {
+        this.load(this.LoadMCCompeleted);
+    };
+    Player.prototype.LoadMCCompeleted = function () {
+        var mcDataFactory = new egret.MovieClipDataFactory(this.m_mcData, this.m_mcTexture);
+        var mcData = mcDataFactory.generateMovieClipData(this.m_mcName);
+        this.m_mc = new egret.MovieClip(mcData);
+        GamePlay.Instance().addChild(this.m_mc);
+        this.m_mc.play(-1);
+        this.ResetPos();
+    };
+    Player.prototype.load = function (callback) {
+        var count = 0;
+        var self = this;
+        var check = function () {
+            count++;
+            if (count == 2) {
+                callback.call(self);
+            }
+        };
+        var loader = new egret.URLLoader();
+        loader.addEventListener(egret.Event.COMPLETE, function loadOver(e) {
+            var loader = e.currentTarget;
+            this.m_mcTexture = loader.data;
+            check();
+        }, this);
+        loader.dataFormat = egret.URLLoaderDataFormat.TEXTURE;
+        var request = new egret.URLRequest(this.m_mcTexturePath);
+        loader.load(request);
+        var loader = new egret.URLLoader();
+        loader.addEventListener(egret.Event.COMPLETE, function loadOver(e) {
+            var loader = e.currentTarget;
+            this.m_mcData = JSON.parse(loader.data);
+            check();
+        }, this);
+        loader.dataFormat = egret.URLLoaderDataFormat.TEXT;
+        var request = new egret.URLRequest(this.m_mcJsonPath);
+        loader.load(request);
+    };
+    Player.prototype.ResetPos = function () {
+        this.m_mc.x = 50;
+        this.m_mc.y = 150;
+    };
+    return Player;
+}());
+__reflect(Player.prototype, "Player");
+//# sourceMappingURL=Player.js.map

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="UIGameOverSkin" width="288" height="512" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" >
+	<w:Config id="15d73be1cdf" ></w:Config>
+	<e:Image source="UI_json.text_game_over" horizontalCenter="0" verticalCenter="-146"/>
+	<e:Image id="m_ImgScorePanel" source="UI_json.score_panel" horizontalCenter="0" verticalCenter="-32"/>
+	<e:Label id="m_LabelBest" text="999" x="160" y="242" size="24" anchorOffsetX="0" width="76" textAlign="right"/>
+	<e:Button id="m_BtnPlay" label="" horizontalCenter="-58" verticalCenter="74">
+		<e:skinName>
+			<e:Skin states="up,down,disabled">
+			<e:Image width="100%" height="100%" source="UI_json.button_play"/>
+			<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+			</e:Skin>
+		</e:skinName>
+	</e:Button>
+	<e:Button id="m_BtnRank" label="" horizontalCenter="61" verticalCenter="74">
+		<e:skinName>
+			<e:Skin states="up,down,disabled">
+			<e:Image width="100%" height="100%" source="UI_json.button_score"/>
+			<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+			</e:Skin>
+		</e:skinName>
+	</e:Button>
+	<e:Button id="m_BtnShare" label="" horizontalCenter="0" verticalCenter="146">
+		<e:skinName>
+			<e:Skin states="up,down,disabled">
+			<e:Image width="100%" height="100%" source="UI_json.button_share"/>
+			<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
+			</e:Skin>
+		</e:skinName>
+	</e:Button>
+	<e:Image id="m_ImgMedal" source="UI_json.medals_0" horizontalCenter="-62" verticalCenter="-26"/>
+	<e:Image id="m_ImgNewScore" source="UI_json.new" horizontalCenter="33" verticalCenter="-29"/>
+	<e:Label id="m_LabelScore" text="999" x="161" y="196" size="24" anchorOffsetX="0" width="76" textAlign="right"/>
+</e:Skin>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="UIGameReadySkin" width="288" height="512" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" >
+	<w:Config id="15d5f28d492" ></w:Config>
+	<e:Image source="UI_json.text_ready" anchorOffsetX="0" anchorOffsetY="0" x="46" y="83"/>
+	<e:Image touchEnabled="false" anchorOffsetX="0" anchorOffsetY="0" source="UI_json.tutorial" horizontalCenter="0" verticalCenter="0"/>
+</e:Skin>

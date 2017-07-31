@@ -1,0 +1,42 @@
+{
+	"initial": [
+		"libs/modules/egret/egret.js",
+		"libs/modules/egret/egret.web.js",
+		"libs/modules/game/game.js",
+		"libs/modules/res/res.js",
+		"libs/modules/eui/eui.js",
+		"libs/modules/tween/tween.js",
+		"libs/modules/dragonBones/dragonBones.js",
+		"promise/bin/promise.js"
+	],
+	"game": [
+		"bin-debug/UI/UIBase.js",
+		"bin-debug/Common/Utils/UtilsClass/LListener.js",
+		"bin-debug/Common/Define/Event.js",
+		"bin-debug/Common/Define/GlobalConfig.js",
+		"bin-debug/Common/Manager/GameManager.js",
+		"bin-debug/Common/Manager/UIManager.js",
+		"bin-debug/Common/Utils/EffectUtils.js",
+		"bin-debug/Common/Utils/Functions.js",
+		"bin-debug/Common/Utils/Global.js",
+		"bin-debug/Common/Utils/md5.js",
+		"bin-debug/Common/Utils/NativeApi.js",
+		"bin-debug/Common/Utils/RegUtils.js",
+		"bin-debug/Common/Utils/UtilsClass/BitmapBlink.js",
+		"bin-debug/Common/Utils/UtilsClass/LEvent.js",
+		"bin-debug/Common/Define/Define.js",
+		"bin-debug/Common/Utils/UtilsClass/TipsUtils.js",
+		"bin-debug/GamePlay/GameDefine.js",
+		"bin-debug/GamePlay/GamePlay.js",
+		"bin-debug/GamePlay/Player.js",
+		"bin-debug/LoadingUI.js",
+		"bin-debug/Main.js",
+		"bin-debug/ThemeAdapter.js",
+		"bin-debug/UI/Temp.js",
+		"bin-debug/AssetAdapter.js",
+		"bin-debug/UI/UIGameOver.js",
+		"bin-debug/UI/UIGamePlay.js",
+		"bin-debug/UI/UIGameReady.js",
+		"bin-debug/UI/UIGameStart.js"
+	]
+}
