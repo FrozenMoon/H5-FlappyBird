@@ -9,6 +9,7 @@ module GameEvents {
 
 	// 游戏逻辑
 	export var ADD_SCORE : string = "GameEventsAddScore";
+	export var TAP_BIRD  : string = "GameEventsTapBird";
 }
 
 module UIEvents {

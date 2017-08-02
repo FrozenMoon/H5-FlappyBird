@@ -13,7 +13,7 @@ class UIGameOver extends UIBase
 		this.m_BtnPlay.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onBtnPlay, this);
 	}
 
-	private onBtnPlay():void
+	private onBtnPlay() : void
 	{
 		Global.dispatchEvent(GameEvents.GAME_READY);
 	}

@@ -1,15 +1,14 @@
 class Player 
 {
 	// 帧动画
-	private m_mc : egret.MovieClip;
-	private m_mcData : any;
-    private m_mcTexture:egret.Texture;
+	private m_mc            : egret.MovieClip;
+	private m_mcData        : any;
+    private m_mcTexture     : egret.Texture;
 	private m_mcName 		: string = "BirdYellow";
 	private m_mcTexturePath : string = "resource/assets/animation/BirdYellow.png";
 	private m_mcJsonPath 	: string = "resource/assets/animation/BirdYellow.json";
-
-	// 物理系统
-	//private m_body : p2.Body;
+    private m_isFly         : boolean = false;
+    private m_body          : p2.Body;
 
 	public constructor() 
 	{
@@ -18,6 +17,7 @@ class Player
 	public Init() : void
 	{
 		this.load(this.LoadMCCompeleted);
+        Functions.AddEventListener(GameEvents.TAP_BIRD, this.OnTap, this);
 	}
 
 	private LoadMCCompeleted() : void
@@ -28,7 +28,19 @@ class Player
         GamePlay.Instance().addChild(this.m_mc);
         this.m_mc.play(-1);
 
-        this.ResetPos();
+        this.SetPos(GameDefine.BirdX, GameDefine.BirdY);
+
+        this.m_body = new p2.Body
+		(
+			{
+            position:[GameDefine.BirdX, GameDefine.BirdY],
+            collisionResponse: false,
+            mass : 1,
+            fixedRotation : true
+			}
+		);
+        this.m_body.displays = [this.m_mc];
+        GamePlay.Instance().AddWorld(this.m_body);
 	}
 
 	private load(callback:Function) : void 
@@ -69,10 +81,24 @@ class Player
         loader.load(request);
     }
 
-	public ResetPos() : void
+	public SetPos(x : number, y : number) : void
 	{
-		this.m_mc.x = 50;
-        this.m_mc.y = 150;
+		this.m_mc.x = x;
+        this.m_mc.y = y;
 	}
 
+    public GetMC() : egret.MovieClip
+    {
+        return this.m_mc;
+    }
+
+    public OnTap() : void
+    {
+        this.m_isFly = true;
+        egret.Tween.removeTweens(this.m_mc);
+
+        let tw1 = egret.Tween.get(this.m_mc);
+        tw1.to( { y : this.m_mc.y - 50}, GameDefine.BirdFlyTime);
+        
+    }
 }

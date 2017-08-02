@@ -9,22 +9,26 @@ var __extends = (this && this.__extends) || function (d, b) {
 var UIGamePlay = (function (_super) {
     __extends(UIGamePlay, _super);
     function UIGamePlay() {
-        return _super !== null && _super.apply(this, arguments) || this;
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.m_Type = 0;
+        return _this;
     }
     UIGamePlay.prototype.OnInit = function () {
-        this.m_LabelScore.touchEnabled = false;
         this.m_LabelScore.text = "0";
         Functions.AddEventListener(GameEvents.ADD_SCORE, this.OnAddScore, this);
-        this.m_Main.addEventListener(egret.TouchEvent.TOUCH_TAP, this.OnTap, this);
+        this.addEventListener(egret.TouchEvent.TOUCH_TAP, this.OnTap, this);
     };
     UIGamePlay.prototype.OnAddScore = function (event) {
+        var nAddType = event.param;
+        if (this.m_Type == nAddType) {
+            return;
+        }
+        this.m_Type = nAddType;
         var nNowScore = parseInt(this.m_LabelScore.text);
-        var nAddScore = event.param;
-        nNowScore += nAddScore;
-        this.m_LabelScore.text = String(nNowScore);
+        this.m_LabelScore.text = String(nNowScore + 1);
     };
     UIGamePlay.prototype.OnTap = function () {
-        Functions.DispatchEvent(GameEvents.GAME_OVER);
+        Functions.DispatchEvent(GameEvents.TAP_BIRD);
     };
     return UIGamePlay;
 }(UIBase));

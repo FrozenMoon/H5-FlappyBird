@@ -16,8 +16,7 @@
     "UIGameStart": "resource/eui_skins/UI/UIGameStart.exml?v20170720",
     "UIGameReady": "resource/eui_skins/UI/UIGameReady.exml?v20170720",
     "UIGamePlay": "resource/eui_skins/UI/UIGamePlay.exml?v20170720",
-    "UIGameOver": "resource/eui_skins/UI/UIGameOver.exml?v20170720",
-    "Temp": "resource/eui_skins/UI/Temp.exml"
+    "UIGameOver": "resource/eui_skins/UI/UIGameOver.exml?v20170720"
   },
   "autoGenerateExmlsList": true,
   "exmls": [
@@ -35,7 +34,6 @@
     "resource/eui_skins/Default/ToggleSwitchSkin.exml",
     "resource/eui_skins/Default/VScrollBarSkin.exml",
     "resource/eui_skins/Default/VSliderSkin.exml",
-    "resource/eui_skins/UI/Temp.exml",
     "resource/eui_skins/UI/UIGameOver.exml",
     "resource/eui_skins/UI/UIGamePlay.exml",
     "resource/eui_skins/UI/UIGameReady.exml",

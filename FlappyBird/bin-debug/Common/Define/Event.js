@@ -8,6 +8,7 @@ var GameEvents;
     GameEvents.GAME_OVER = "GameEventsGameOver";
     // 游戏逻辑
     GameEvents.ADD_SCORE = "GameEventsAddScore";
+    GameEvents.TAP_BIRD = "GameEventsTapBird";
 })(GameEvents || (GameEvents = {}));
 var UIEvents;
 (function (UIEvents) {

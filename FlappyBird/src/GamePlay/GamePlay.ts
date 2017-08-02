@@ -10,6 +10,8 @@ class GamePlay extends egret.DisplayObjectContainer　
 	private m_Pipes 			 : Array<egret.Bitmap> = [];
 	private m_GameState 		 : GameDefine.GAME_STATE;
 	private m_Player			 : Player;
+	private m_pWorld			 : p2.World;
+	private m_debugDraw			 : p2DebugDraw;
 
 	// 单例
 	private static m_instance : GamePlay;
@@ -35,6 +37,13 @@ class GamePlay extends egret.DisplayObjectContainer　
 		Functions.AddEventListener(GameEvents.GAME_READY, this.OnGameReady, this);
 		Functions.AddEventListener(GameEvents.GAME_PLAY,  this.OnGamePlay, this);
 		Functions.AddEventListener(GameEvents.GAME_OVER, this.OnGameOver, this);
+
+		this.m_pWorld = new p2.World({gravity : [0, 9.82]});
+	}
+
+	public AddWorld(body : p2.Body) : void
+	{
+		this.m_pWorld.addBody(body);
 	}
 
 	private CreateScene() : void
@@ -46,13 +55,35 @@ class GamePlay extends egret.DisplayObjectContainer　
 		// 土地
 		this.m_Land_1 = Functions.createBitmapByName("gameplay_json.land");
 		this.m_Land_1.x = 0;
-		this.m_Land_1.y = 400;
+		this.m_Land_1.y = this.m_Sky.height - this.m_Land_1.height;
 		this.addChild(this.m_Land_1);
 
 		this.m_Land_2 = Functions.createBitmapByName("gameplay_json.land");
 		this.m_Land_2.x = this.m_Land_2.width - 10;
-		this.m_Land_2.y = 400;
+		this.m_Land_2.y = this.m_Sky.height - this.m_Land_1.height;
 		this.addChild(this.m_Land_2);
+
+		var planeShape = new p2.Plane();
+        var plane = new p2.Body
+		(
+			{
+            position:[0, -this.m_Land_1.y],
+            collisionResponse: false
+			}
+		);
+        plane.addShape(planeShape);
+		this.AddWorld(plane);
+
+		var boxShape: p2.Shape = new p2.Box({width: 100, height: 100});
+        var boxBody: p2.Body = new p2.Body({ mass: 1, position: [100, 100] });
+        boxBody.addShape(boxShape);
+        this.AddWorld(boxBody);
+
+		//创建调试试图
+        this.m_debugDraw = new p2DebugDraw(this.m_pWorld);
+        var sprite: egret.Sprite = new egret.Sprite();
+        this.addChild(sprite);
+        this.m_debugDraw.setSprite(sprite);
 
 		// 土地移动
 		let tw1 = egret.Tween.get(this.m_Land_1, {loop : true});
@@ -86,7 +117,8 @@ class GamePlay extends egret.DisplayObjectContainer　
 		}
 		else
 		{
-			this.m_Player.ResetPos();
+			this.m_Player.GetMC().play(-1);
+			this.m_Player.SetPos(GameDefine.BirdX, GameDefine.BirdY);
 		}
 		
 		// 水管
@@ -127,13 +159,13 @@ class GamePlay extends egret.DisplayObjectContainer　
 
 		Functions.DispatchEvent(UIEvents.CLOSE_PANEL, UIDefine.PanelID.UIGameReady);
 		Functions.DispatchEvent(UIEvents.OPEN_PANEL, UIDefine.PanelID.UIGamePlay);
-		this.addEventListener(egret.TouchEvent.TOUCH_TAP, this.OnTap, this);
 	}
 
 	private OnGameOver() : void 
 	{
 		this.m_GameState = GameDefine.GAME_STATE.GameOver;
 
+		this.m_Player.GetMC().stop();
 		egret.Tween.pauseTweens(this.m_Land_1);
 		egret.Tween.pauseTweens(this.m_Land_2);
 
@@ -149,6 +181,8 @@ class GamePlay extends egret.DisplayObjectContainer　
 		this.m_TimeScale = timeEnterFrame - this.m_LastTimeEnterFrame;
 		let state = this.m_GameState;
 
+		this.m_pWorld.step(60 / 1000);
+
 		if (state == GameDefine.GAME_STATE.GamePlay)
 		{
 			for (let i = 1; i <= this.m_PipesCount; ++i)
@@ -160,19 +194,88 @@ class GamePlay extends egret.DisplayObjectContainer　
 			{
 				this.PipeMove(i);
 			}
+
+			// 小鸟匀速下降
+			var birdY = this.m_Player.GetMC().y;
+			var birdX = this.m_Player.GetMC().x;
+		//	this.BirdMove();
+
+			var birdMaxY = this.m_Land_1.y - this.m_Player.GetMC().height - 10;
+			if (birdY >= birdMaxY)
+			{
+				Functions.DispatchEvent(GameEvents.GAME_OVER);
+			}
+
+			// 碰撞柱子
+			var rectBird : egret.Rectangle = new egret.Rectangle(birdX, birdY, this.m_Player.GetMC().width, this.m_Player.GetMC().height);
+			for (let i = 1; i <= this.m_PipesCount; ++i)
+			{
+				var isCrash = this.CheckPipeCrash(rectBird, this.m_Pipes[i]);
+				if (isCrash)
+				{
+			//		Functions.DispatchEvent(GameEvents.GAME_OVER);
+					break;
+				}
+			}
+
+			// 得分
+			if (this.CheckScore(rectBird, this.m_Pipes[1]))
+			{
+				Functions.DispatchEvent(GameEvents.ADD_SCORE, 1);
+			}
+
+			if (this.CheckScore(rectBird, this.m_Pipes[3]))
+			{
+				Functions.DispatchEvent(GameEvents.ADD_SCORE, 3);
+			}
+		}
+		else if (state == GameDefine.GAME_STATE.GameOver)
+		{
+			this.BirdMove();
 		}
 
+		this.m_debugDraw.drawDebug();
+
 		this.m_LastTimeEnterFrame = nowTime;
+	}
+
+	private CheckPipeCrash(rectBird : egret.Rectangle, pipi : egret.Bitmap) : boolean 
+	{
+		var isCrash : boolean = false;
+		var rect : egret.Rectangle = new egret.Rectangle(pipi.x, pipi.y, pipi.width, pipi.height);
+		isCrash = rectBird.intersects(rect);
+		return isCrash;
+	}
+
+	private CheckScore(rectBird : egret.Rectangle, pipi : egret.Bitmap) : boolean 
+	{
+		var isScore : boolean = false;
+		var rectScore : egret.Rectangle = new egret.Rectangle(pipi.x + pipi.width / 2, pipi.y - GameDefine.PipeDistance, pipi.width / 2, GameDefine.PipeDistance);
+		isScore = rectBird.intersects(rectScore);
+		return isScore;
+	}
+
+	private BirdMove() : void
+	{
+		var birdY = this.m_Player.GetMC().y;
+		var birdX = this.m_Player.GetMC().x;
+		birdY += this.m_TimeScale * GameDefine.BirdDownSpeed;
+		var birdMaxY = this.m_Land_1.y - this.m_Player.GetMC().height - 10;
+		if (birdY >= birdMaxY)
+		{
+			birdY = birdMaxY;
+		}
+		this.m_Player.SetPos(birdX, birdY);
 	}
 
 	private PipeMove(indexPipe : number) : void
 	{
 		if (indexPipe % 2 == 0 && this.m_Pipes[indexPipe].x <= -this.m_Pipes[indexPipe].width)
 		{
-			this.m_Pipes[indexPipe - 1].x = GlobalConfig.curWidth();;
+			this.m_Pipes[indexPipe - 1].x = GlobalConfig.curWidth();
 			this.m_Pipes[indexPipe - 1].y = Functions.RandomNum(GameDefine.PipeMinY, GameDefine.PipeMaxY);
 
-			this.m_Pipes[indexPipe].x = GlobalConfig.curWidth();;
+			this.m_Pipes[indexPipe].x = GlobalConfig.curWidth();
 			this.m_Pipes[indexPipe].y = this.m_Pipes[indexPipe - 1].y - GameDefine.PipeDistance - this.m_Pipes[indexPipe].height;
 		}
 	}
@@ -185,10 +288,5 @@ class GamePlay extends egret.DisplayObjectContainer　
 	public GameResume() : void
 	{
 		this.m_LastTimeEnterFrame = egret.getTimer();
-	}
-
-	private OnTap() : void
-	{
-		Functions.DispatchEvent(GameEvents.GAME_OVER);
 	}
 }

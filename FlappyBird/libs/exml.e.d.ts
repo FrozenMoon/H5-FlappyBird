@@ -52,8 +52,6 @@ declare module skins{
 	class VSliderSkin extends eui.Skin{
 	}
 }
-declare class TempSkin extends eui.Skin{
-}
 declare class UIGameOverSkin extends eui.Skin{
 }
 declare class UIGamePlaySkin extends eui.Skin{

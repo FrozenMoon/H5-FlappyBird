@@ -12,7 +12,6 @@ var UIGameReady = (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     UIGameReady.prototype.OnInit = function () {
-        this.touchEnabled = true;
         this.addEventListener(egret.TouchEvent.TOUCH_TAP, this.OnGamePlay, this);
     };
     UIGameReady.prototype.OnGamePlay = function () {

@@ -2,15 +2,15 @@ var __reflect = (this && this.__reflect) || function (p, c, t) {
     p.__class__ = c, t ? t.push(c) : t = [c], p.__types__ = p.__types__ ? t.concat(p.__types__) : t;
 };
 var Player = (function () {
-    // 物理系统
-    //private m_body : p2.Body;
     function Player() {
         this.m_mcName = "BirdYellow";
         this.m_mcTexturePath = "resource/assets/animation/BirdYellow.png";
         this.m_mcJsonPath = "resource/assets/animation/BirdYellow.json";
+        this.m_isFly = false;
     }
     Player.prototype.Init = function () {
         this.load(this.LoadMCCompeleted);
+        Functions.AddEventListener(GameEvents.TAP_BIRD, this.OnTap, this);
     };
     Player.prototype.LoadMCCompeleted = function () {
         var mcDataFactory = new egret.MovieClipDataFactory(this.m_mcData, this.m_mcTexture);
@@ -18,7 +18,15 @@ var Player = (function () {
         this.m_mc = new egret.MovieClip(mcData);
         GamePlay.Instance().addChild(this.m_mc);
         this.m_mc.play(-1);
-        this.ResetPos();
+        this.SetPos(GameDefine.BirdX, GameDefine.BirdY);
+        this.m_body = new p2.Body({
+            position: [GameDefine.BirdX, GameDefine.BirdY],
+            collisionResponse: false,
+            mass: 1,
+            fixedRotation: true
+        });
+        this.m_body.displays = [this.m_mc];
+        GamePlay.Instance().AddWorld(this.m_body);
     };
     Player.prototype.load = function (callback) {
         var count = 0;
@@ -48,9 +56,18 @@ var Player = (function () {
         var request = new egret.URLRequest(this.m_mcJsonPath);
         loader.load(request);
     };
-    Player.prototype.ResetPos = function () {
-        this.m_mc.x = 50;
-        this.m_mc.y = 150;
+    Player.prototype.SetPos = function (x, y) {
+        this.m_mc.x = x;
+        this.m_mc.y = y;
+    };
+    Player.prototype.GetMC = function () {
+        return this.m_mc;
+    };
+    Player.prototype.OnTap = function () {
+        this.m_isFly = true;
+        egret.Tween.removeTweens(this.m_mc);
+        var tw1 = egret.Tween.get(this.m_mc);
+        tw1.to({ y: this.m_mc.y - 50 }, GameDefine.BirdFlyTime);
     };
     return Player;
 }());

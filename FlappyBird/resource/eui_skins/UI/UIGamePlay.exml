@@ -2,6 +2,8 @@
 <e:Skin class="UIGamePlaySkin" width="288" height="512" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" >
 	<w:Config id="15d73940b04" ></w:Config>
 	<e:Panel id="m_Main" anchorOffsetX="0" anchorOffsetY="0" left="0" right="0" top="0" bottom="0" skinName="PanelEmptySkin">
-		<e:Label id="m_LabelScore" text="0" anchorOffsetX="0" width="114" verticalAlign="middle" textAlign="center" anchorOffsetY="0" height="47" size="40" fontFamily="Microsoft YaHei" bold="true" scaleX="1" scaleY="1" horizontalCenter="0" verticalCenter="-160.5"/>
+		<e:Group width="287" height="511" x="1" y="0" anchorOffsetX="0" anchorOffsetY="0">
+			<e:Label id="m_LabelScore" text="0" anchorOffsetX="0" width="114" verticalAlign="middle" textAlign="center" anchorOffsetY="0" height="47" size="40" fontFamily="Microsoft YaHei" bold="true" scaleX="1" scaleY="1" horizontalCenter="0" verticalCenter="-147.5" x="86" y="85"/>
+		</e:Group>
 	</e:Panel>
 </e:Skin>
