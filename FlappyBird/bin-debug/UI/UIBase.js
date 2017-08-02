@@ -10,7 +10,10 @@ var UIBase = (function (_super) {
     __extends(UIBase, _super);
     function UIBase() {
         var _this = _super.call(this) || this;
-        _this.addEventListener(eui.UIEvent.COMPLETE, _this.Init, _this);
+        _this.m_inited = false;
+        _this.once(eui.UIEvent.COMPLETE, _this.Init, _this);
+        _this.addEventListener(egret.Event.REMOVED_FROM_STAGE, _this.OnClose, _this);
+        _this.addEventListener(egret.Event.ADDED_TO_STAGE, _this.Open, _this);
         return _this;
     }
     UIBase.prototype.partAdded = function (partName, instance) {
@@ -23,15 +26,15 @@ var UIBase = (function (_super) {
         _super.prototype.childrenCreated.call(this);
     };
     UIBase.prototype.Init = function () {
-        this.removeEventListener(eui.UIEvent.COMPLETE, this.Init, this);
-        // 默认是全屏居中的布局，需要自定义可在OnInit()修改
-        //this.horizontalCenter = 0;
-        //this.verticalCenter = 0;
-        //this.width = GlobalConfig.curWidth();
-        //this.height = GlobalConfig.curHeight();
+        this.m_inited = true;
         this.OnInit();
     };
     UIBase.prototype.OnInit = function () {
+    };
+    UIBase.prototype.Open = function () {
+        if (this.m_inited) {
+            this.OnOpen();
+        }
     };
     UIBase.prototype.OnOpen = function () {
     };

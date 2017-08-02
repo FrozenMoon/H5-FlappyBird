@@ -19,14 +19,6 @@ var Player = (function () {
         GamePlay.Instance().addChild(this.m_mc);
         this.m_mc.play(-1);
         this.SetPos(GameDefine.BirdX, GameDefine.BirdY);
-        this.m_body = new p2.Body({
-            position: [GameDefine.BirdX, GameDefine.BirdY],
-            collisionResponse: false,
-            mass: 1,
-            fixedRotation: true
-        });
-        this.m_body.displays = [this.m_mc];
-        GamePlay.Instance().AddWorld(this.m_body);
     };
     Player.prototype.load = function (callback) {
         var count = 0;
@@ -67,7 +59,8 @@ var Player = (function () {
         this.m_isFly = true;
         egret.Tween.removeTweens(this.m_mc);
         var tw1 = egret.Tween.get(this.m_mc);
-        tw1.to({ y: this.m_mc.y - 50 }, GameDefine.BirdFlyTime);
+        tw1.to({ y: this.m_mc.y - GameDefine.BirdFlyHeight }, GameDefine.BirdFlyTime);
+        GamePlay.Instance().m_TimeDrop = 0;
     };
     return Player;
 }());

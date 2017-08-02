@@ -14,9 +14,12 @@ var UIGamePlay = (function (_super) {
         return _this;
     }
     UIGamePlay.prototype.OnInit = function () {
-        this.m_LabelScore.text = "0";
         Functions.AddEventListener(GameEvents.ADD_SCORE, this.OnAddScore, this);
         this.addEventListener(egret.TouchEvent.TOUCH_TAP, this.OnTap, this);
+        this.OnOpen();
+    };
+    UIGamePlay.prototype.OnOpen = function () {
+        this.m_LabelScore.text = "0";
     };
     UIGamePlay.prototype.OnAddScore = function (event) {
         var nAddType = event.param;

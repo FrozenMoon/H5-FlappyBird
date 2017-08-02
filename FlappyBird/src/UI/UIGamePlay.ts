@@ -7,9 +7,15 @@ class UIGamePlay extends UIBase
 
 	protected OnInit() : void
 	{
-		this.m_LabelScore.text = "0";
 		Functions.AddEventListener(GameEvents.ADD_SCORE, this.OnAddScore, this);
 		this.addEventListener(egret.TouchEvent.TOUCH_TAP, this.OnTap, this);
+
+		this.OnOpen();
+	}
+
+	public OnOpen() : void
+	{
+		this.m_LabelScore.text = "0";
 	}
 
 	private OnAddScore(event) : void
@@ -20,7 +26,7 @@ class UIGamePlay extends UIBase
 			return;
 		}
 		this.m_Type = nAddType;
-		
+
 		let nNowScore : number = parseInt(this.m_LabelScore.text);
 		this.m_LabelScore.text = String(nNowScore + 1);
 	}

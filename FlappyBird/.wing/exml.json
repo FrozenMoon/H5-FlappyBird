@@ -1,25 +1,30 @@
 {
-  "15d5eb6e09f": {
-    "path": "..\\resource\\assets\\UIGameStart.ts",
-    "class": "UIGameStart",
-    "parentPath": "",
-    "bindingDataTestObj": [
-      {
-        "key": "btnPlay",
-        "value": "btnPlay"
-      }
-    ]
-  },
-  "global": {
-    "globalBindingDataTestObj": [],
-    "globalAutoLayerMarkEnable": false
-  },
-  "15d5f28d492": {
-    "path": "..\\resource\\eui_skins\\UI\\UIGameReady.ts",
-    "class": "UIGameReady",
-    "parentPath": "resource/eui_skins/UI/UIGameStart.exml?v20170720"
-  },
-  "15d73be1cdf": {
-    "bindingDataTestObj": []
-  }
+    "15d5eb6e09f": {
+        "path": "..\\resource\\assets\\UIGameStart.ts",
+        "class": "UIGameStart",
+        "parentPath": "",
+        "bindingDataTestObj": [
+            {
+                "key": "btnPlay",
+                "value": "btnPlay"
+            }
+        ]
+    },
+    "global": {
+        "globalBindingDataTestObj": [],
+        "globalAutoLayerMarkEnable": false
+    },
+    "15d5f28d492": {
+        "path": "..\\resource\\eui_skins\\UI\\UIGameReady.ts",
+        "class": "UIGameReady",
+        "parentPath": "resource/eui_skins/UI/UIGameStart.exml?v20170720"
+    },
+    "15d73be1cdf": {
+        "bindingDataTestObj": []
+    },
+    "15da26dadac": {
+        "path": "..\\resource\\eui_skins\\UI\\UIGameDeath.ts",
+        "class": "UIGameDeath",
+        "parentPath": ""
+    }
 }

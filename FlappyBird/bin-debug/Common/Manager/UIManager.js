@@ -41,8 +41,9 @@ var UIManager = (function (_super) {
                     break;
             }
         }
-        if (this.m_uiPanels[id] && !this.IsOpen(id)) {
-            this.addChild(this.m_uiPanels[id]);
+        if (this.m_uiPanels[id]) {
+            if (!this.IsOpen(id))
+                this.addChild(this.m_uiPanels[id]);
         }
     };
     UIManager.prototype.ClosePanel = function (event) {

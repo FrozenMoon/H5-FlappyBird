@@ -29,18 +29,6 @@ class Player
         this.m_mc.play(-1);
 
         this.SetPos(GameDefine.BirdX, GameDefine.BirdY);
-
-        this.m_body = new p2.Body
-		(
-			{
-            position:[GameDefine.BirdX, GameDefine.BirdY],
-            collisionResponse: false,
-            mass : 1,
-            fixedRotation : true
-			}
-		);
-        this.m_body.displays = [this.m_mc];
-        GamePlay.Instance().AddWorld(this.m_body);
 	}
 
 	private load(callback:Function) : void 
@@ -98,7 +86,8 @@ class Player
         egret.Tween.removeTweens(this.m_mc);
 
         let tw1 = egret.Tween.get(this.m_mc);
-        tw1.to( { y : this.m_mc.y - 50}, GameDefine.BirdFlyTime);
+        tw1.to( { y : this.m_mc.y - GameDefine.BirdFlyHeight}, GameDefine.BirdFlyTime);
         
+        GamePlay.Instance().m_TimeDrop = 0;
     }
 }

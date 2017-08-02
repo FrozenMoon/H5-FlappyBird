@@ -63,6 +63,22 @@ class p2DebugDraw {
                     this.drawCapsule(<p2.Capsule>shape, body);
                 }
             }
+
+            if (body.displays)
+            {
+                var box : egret.DisplayObject = body.displays[0];
+                if (box) {
+                    box.x = body.position[0] * GameDefine.P2Factor;
+                    box.y = GlobalConfig.curHeight() - body.position[1] * GameDefine.P2Factor;
+                    box.rotation = 360 - (body.angle + body.shapes[0].angle) * 180 / Math.PI;
+                    if (body.sleepState == p2.Body.SLEEPING) {
+                        box.alpha = 0.5;
+                    }
+                    else {
+                        box.alpha = 1;
+                    }
+                }
+            }
         }
     }
     private drawCircle(shape: p2.Circle, b: p2.Body): void {

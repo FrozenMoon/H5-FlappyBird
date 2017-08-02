@@ -1,8 +1,12 @@
 class UIBase extends eui.Component implements eui.UIComponent 
 {
+	protected m_inited : boolean = false;
+
 	public constructor() {
 		super();
-		this.addEventListener(eui.UIEvent.COMPLETE, this.Init, this);
+		this.once(eui.UIEvent.COMPLETE, this.Init, this);
+		this.addEventListener(egret.Event.REMOVED_FROM_STAGE, this.OnClose, this);
+		this.addEventListener(egret.Event.ADDED_TO_STAGE, this.Open, this);
 	}
 
 	protected partAdded(partName:string, instance:any) : void
@@ -22,13 +26,7 @@ class UIBase extends eui.Component implements eui.UIComponent
 
 	private Init() : void
 	{
-		this.removeEventListener(eui.UIEvent.COMPLETE , this.Init, this);
-		// 默认是全屏居中的布局，需要自定义可在OnInit()修改
-		//this.horizontalCenter = 0;
-        //this.verticalCenter = 0;
-		//this.width = GlobalConfig.curWidth();
-        //this.height = GlobalConfig.curHeight();
-
+		this.m_inited = true;
 		this.OnInit();
 	}
 	
@@ -37,9 +35,17 @@ class UIBase extends eui.Component implements eui.UIComponent
 		
 	}
 
-	protected OnOpen() : void
+	public Open() : void
 	{
+		if (this.m_inited)
+		{
+			this.OnOpen();
+		}
+	}
 
+	protected OnOpen() : void 
+	{
+		
 	}
 
 	public OnClose() : void

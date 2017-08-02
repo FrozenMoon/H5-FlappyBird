@@ -66,6 +66,20 @@ var p2DebugDraw = (function () {
                     this.drawCapsule(shape, body);
                 }
             }
+            if (body.displays) {
+                var box = body.displays[0];
+                if (box) {
+                    box.x = body.position[0] * GameDefine.P2Factor;
+                    box.y = GlobalConfig.curHeight() - body.position[1] * GameDefine.P2Factor;
+                    box.rotation = 360 - (body.angle + body.shapes[0].angle) * 180 / Math.PI;
+                    if (body.sleepState == p2.Body.SLEEPING) {
+                        box.alpha = 0.5;
+                    }
+                    else {
+                        box.alpha = 1;
+                    }
+                }
+            }
         }
     };
     p2DebugDraw.prototype.drawCircle = function (shape, b) {

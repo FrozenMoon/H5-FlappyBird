@@ -47,9 +47,10 @@ class UIManager extends eui.UILayer
 			}
 		}
 
-		if (this.m_uiPanels[id] && !this.IsOpen(id))
+		if (this.m_uiPanels[id])
 		{
-			this.addChild(this.m_uiPanels[id]);
+			if (!this.IsOpen(id))
+				this.addChild(this.m_uiPanels[id]);
 		}
 	}
 

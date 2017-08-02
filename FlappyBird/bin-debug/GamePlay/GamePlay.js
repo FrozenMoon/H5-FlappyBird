@@ -11,6 +11,7 @@ var GamePlay = (function (_super) {
     function GamePlay() {
         var _this = _super.call(this) || this;
         _this.m_TimeScale = 0;
+        _this.m_TimeDrop = 0;
         _this.m_LastTimeEnterFrame = 0;
         _this.m_PipesCount = 4;
         _this.m_Pipes = [];
@@ -28,7 +29,9 @@ var GamePlay = (function (_super) {
         Functions.AddEventListener(GameEvents.GAME_READY, this.OnGameReady, this);
         Functions.AddEventListener(GameEvents.GAME_PLAY, this.OnGamePlay, this);
         Functions.AddEventListener(GameEvents.GAME_OVER, this.OnGameOver, this);
+        // TODO p2的使用不熟悉，以后再考虑加入
         this.m_pWorld = new p2.World({ gravity: [0, 9.82] });
+        this.m_pWorld.sleepMode = p2.World.BODY_SLEEPING;
     };
     GamePlay.prototype.AddWorld = function (body) {
         this.m_pWorld.addBody(body);
@@ -46,17 +49,6 @@ var GamePlay = (function (_super) {
         this.m_Land_2.x = this.m_Land_2.width - 10;
         this.m_Land_2.y = this.m_Sky.height - this.m_Land_1.height;
         this.addChild(this.m_Land_2);
-        var planeShape = new p2.Plane();
-        var plane = new p2.Body({
-            position: [0, -this.m_Land_1.y],
-            collisionResponse: false
-        });
-        plane.addShape(planeShape);
-        this.AddWorld(plane);
-        var boxShape = new p2.Box({ width: 100, height: 100 });
-        var boxBody = new p2.Body({ mass: 1, position: [100, 100] });
-        boxBody.addShape(boxShape);
-        this.AddWorld(boxBody);
         //创建调试试图
         this.m_debugDraw = new p2DebugDraw(this.m_pWorld);
         var sprite = new egret.Sprite();
@@ -111,6 +103,7 @@ var GamePlay = (function (_super) {
     };
     GamePlay.prototype.OnGamePlay = function () {
         this.m_GameState = GameDefine.GAME_STATE.GamePlay;
+        this.m_TimeDrop = 0;
         Functions.DispatchEvent(UIEvents.CLOSE_PANEL, UIDefine.PanelID.UIGameReady);
         Functions.DispatchEvent(UIEvents.OPEN_PANEL, UIDefine.PanelID.UIGamePlay);
     };
@@ -120,8 +113,12 @@ var GamePlay = (function (_super) {
         egret.Tween.pauseTweens(this.m_Land_1);
         egret.Tween.pauseTweens(this.m_Land_2);
         Functions.DispatchEvent(UIEvents.CLOSE_PANEL, UIDefine.PanelID.UIGamePlay);
+        var timer = new egret.Timer(1000, 1);
+        timer.once(egret.TimerEvent.TIMER_COMPLETE, this.OnGameOverScore, this);
+        timer.start();
+    };
+    GamePlay.prototype.OnGameOverScore = function () {
         Functions.DispatchEvent(UIEvents.OPEN_PANEL, UIDefine.PanelID.UIGameOver);
-        this.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.OnGamePlay, this);
     };
     GamePlay.prototype.GameLoop = function (e) {
         var nowTime = egret.getTimer();
@@ -131,15 +128,12 @@ var GamePlay = (function (_super) {
         this.m_pWorld.step(60 / 1000);
         if (state == GameDefine.GAME_STATE.GamePlay) {
             for (var i = 1; i <= this.m_PipesCount; ++i) {
-                this.m_Pipes[i].x -= this.m_TimeScale * GameDefine.PipeMoveSpeed;
-            }
-            for (var i = 1; i <= this.m_PipesCount; ++i) {
                 this.PipeMove(i);
             }
-            // 小鸟匀速下降
+            // 小鸟下降
             var birdY = this.m_Player.GetMC().y;
             var birdX = this.m_Player.GetMC().x;
-            //	this.BirdMove();
+            this.BirdMove();
             var birdMaxY = this.m_Land_1.y - this.m_Player.GetMC().height - 10;
             if (birdY >= birdMaxY) {
                 Functions.DispatchEvent(GameEvents.GAME_OVER);
@@ -149,7 +143,7 @@ var GamePlay = (function (_super) {
             for (var i = 1; i <= this.m_PipesCount; ++i) {
                 var isCrash = this.CheckPipeCrash(rectBird, this.m_Pipes[i]);
                 if (isCrash) {
-                    //		Functions.DispatchEvent(GameEvents.GAME_OVER);
+                    Functions.DispatchEvent(GameEvents.GAME_OVER);
                     break;
                 }
             }
@@ -179,10 +173,12 @@ var GamePlay = (function (_super) {
         isScore = rectBird.intersects(rectScore);
         return isScore;
     };
+    // 模拟重力 h = vt + g * t / 2
     GamePlay.prototype.BirdMove = function () {
         var birdY = this.m_Player.GetMC().y;
         var birdX = this.m_Player.GetMC().x;
-        birdY += this.m_TimeScale * GameDefine.BirdDownSpeed;
+        this.m_TimeDrop += this.m_TimeScale;
+        birdY += (this.m_TimeDrop / 800) * (this.m_TimeDrop / 800) * 9.8 / 2;
         var birdMaxY = this.m_Land_1.y - this.m_Player.GetMC().height - 10;
         if (birdY >= birdMaxY) {
             birdY = birdMaxY;
@@ -190,6 +186,7 @@ var GamePlay = (function (_super) {
         this.m_Player.SetPos(birdX, birdY);
     };
     GamePlay.prototype.PipeMove = function (indexPipe) {
+        this.m_Pipes[indexPipe].x -= this.m_TimeScale * GameDefine.PipeMoveSpeed;
         if (indexPipe % 2 == 0 && this.m_Pipes[indexPipe].x <= -this.m_Pipes[indexPipe].width) {
             this.m_Pipes[indexPipe - 1].x = GlobalConfig.curWidth();
             this.m_Pipes[indexPipe - 1].y = Functions.RandomNum(GameDefine.PipeMinY, GameDefine.PipeMaxY);
