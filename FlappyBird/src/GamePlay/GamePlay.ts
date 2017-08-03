@@ -11,10 +11,9 @@ class GamePlay extends egret.DisplayObjectContainer　
 	private m_Pipes 			 : Array<egret.Bitmap> = [];
 	private m_GameState 		 : GameDefine.GAME_STATE;
 	private m_Player			 : Player;
-	private m_pWorld			 : p2.World;	// TODO p2的使用不熟悉，以后再考虑加入
-	private m_debugDraw			 : p2DebugDraw;
 	public  m_MaxScore			 : number = 0;
 	public  m_NowScore			 : number = 0;
+	private m_EffectWhite        : egret.Bitmap;
 
 	// 单例
 	private static m_instance : GamePlay;
@@ -40,22 +39,11 @@ class GamePlay extends egret.DisplayObjectContainer　
 		Functions.AddEventListener(GameEvents.GAME_READY, this.OnGameReady, this);
 		Functions.AddEventListener(GameEvents.GAME_PLAY,  this.OnGamePlay, this);
 		Functions.AddEventListener(GameEvents.GAME_OVER, this.OnGameOver, this);
-
-		// TODO p2的使用不熟悉，以后再考虑加入
-		this.m_pWorld = new p2.World({gravity : [0, 9.82]});
-		this.m_pWorld.sleepMode = p2.World.BODY_SLEEPING;
-
-		
 	}
 
 	public OnAddScore() : void
 	{
 		this.m_NowScore += 1;
-	}
-
-	public AddWorld(body : p2.Body) : void
-	{
-		this.m_pWorld.addBody(body);
 	}
 
 	private CreateScene() : void
@@ -75,18 +63,19 @@ class GamePlay extends egret.DisplayObjectContainer　
 		this.m_Land_2.y = this.m_Sky.height - this.m_Land_1.height;
 		this.addChild(this.m_Land_2);
 
-		//创建调试试图
-        this.m_debugDraw = new p2DebugDraw(this.m_pWorld);
-        var sprite: egret.Sprite = new egret.Sprite();
-        this.addChild(sprite);
-        this.m_debugDraw.setSprite(sprite);
-
 		// 土地移动
 		let tw1 = egret.Tween.get(this.m_Land_1, {loop : true});
         tw1.to( { x : -this.m_Land_1.width}, GameDefine.landMoveTime);
 
 		let tw2 = egret.Tween.get(this.m_Land_2, {loop : true});
         tw2.to( { x : 0}, GameDefine.landMoveTime);
+
+		// 特效
+		this.m_EffectWhite = Functions.createBitmapByName("EffectWhite_png");
+		this.m_EffectWhite.x = 0;
+		this.m_EffectWhite.y = 0;
+		this.m_EffectWhite.width = GlobalConfig.curWidth();
+		this.m_EffectWhite.height = GlobalConfig.curHeight();
 	}
 
 	private OnGameStart() : void 
@@ -97,11 +86,22 @@ class GamePlay extends egret.DisplayObjectContainer　
 		this.CreateScene();
 	}
 
+	// 闪烁特效
+	public PlayEffectWhite(time : number) : void
+	{
+		this.addChild(this.m_EffectWhite);
+		let tw1 = egret.Tween.get(this.m_EffectWhite);
+		this.m_EffectWhite.alpha = 1;
+        tw1.to( { alpha : 0}, time).call(() =>{this.removeChild(this.m_EffectWhite);});
+	}
+
 	private OnGameReady() : void 
 	{
 		this.m_GameState = GameDefine.GAME_STATE.GameReady;
 		this.m_MaxScore = Math.max(this.m_NowScore, Functions.readLocalNumberData(GameDefine.StoregeKeyMaxScore));
 		this.m_NowScore = 0;
+
+		this.PlayEffectWhite(1000);
 
 		Functions.DispatchEvent(UIEvents.CLOSE_PANEL, UIDefine.PanelID.UIGameStart);
 		Functions.DispatchEvent(UIEvents.CLOSE_PANEL, UIDefine.PanelID.UIGameOver);
@@ -157,6 +157,8 @@ class GamePlay extends egret.DisplayObjectContainer　
 		this.m_GameState = GameDefine.GAME_STATE.GamePlay;
 		this.m_TimeDrop = 0;
 
+		this.m_Player.Jump();
+
 		Functions.DispatchEvent(UIEvents.CLOSE_PANEL, UIDefine.PanelID.UIGameReady);
 		Functions.DispatchEvent(UIEvents.OPEN_PANEL, UIDefine.PanelID.UIGamePlay);
 	}
@@ -164,8 +166,7 @@ class GamePlay extends egret.DisplayObjectContainer　
 	private OnGameOver() : void 
 	{
 		this.m_GameState = GameDefine.GAME_STATE.GameOver;
-		var sound:egret.Sound = RES.getRes("AudioHit_mp3");
-        sound.play(0, 1);
+		SoundManage.Instance().Play("AudioHit_mp3");
 
 		// 碰撞特效
 		var mcHit = MCFactory.Instance().getMovieClip("EffectHit_json", "EffectHit_png", "EffectHit");
@@ -175,7 +176,9 @@ class GamePlay extends egret.DisplayObjectContainer　
 		mcHit.scaleY = 2;
         this.addChild(mcHit);
         mcHit.play(1);
-		mcHit.addEventListener(egret.Event.COMPLETE, () =>{this.removeChild(mcHit);}, this);
+		mcHit.once(egret.Event.COMPLETE, () =>{this.removeChild(mcHit);}, this);
+
+		this.PlayEffectWhite(500);
 
 		this.m_Player.GetMC().stop();
 		egret.Tween.pauseTweens(this.m_Land_1);
@@ -199,8 +202,6 @@ class GamePlay extends egret.DisplayObjectContainer　
 		let timeEnterFrame = nowTime
 		this.m_TimeScale = timeEnterFrame - this.m_LastTimeEnterFrame;
 		let state = this.m_GameState;
-
-		this.m_pWorld.step(60 / 1000);
 
 		if (state == GameDefine.GAME_STATE.GamePlay)
 		{
@@ -247,8 +248,6 @@ class GamePlay extends egret.DisplayObjectContainer　
 		{
 			this.BirdMove();
 		}
-
-		this.m_debugDraw.drawDebug();
 
 		this.m_LastTimeEnterFrame = nowTime;
 	}

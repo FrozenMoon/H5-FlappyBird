@@ -13,10 +13,6 @@ declare module skins{
 	}
 }
 declare module skins{
-	class ProgressBarSkin extends eui.Skin{
-	}
-}
-declare module skins{
 	class TextInputSkin extends eui.Skin{
 	}
 }

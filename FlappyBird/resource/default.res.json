@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "description_json,UI_png,UI_json,button_down_png,button_up_png,checkbox_select_disabled_png,checkbox_select_down_png,checkbox_select_up_png,checkbox_unselect_png,border_png,header_png,gameplay_json,BirdYellow_png,BirdYellow_json,AudioJump_mp3,AudioHit_mp3,AudioDie_mp3,AudioScore_mp3,AudioSwitch_mp3,EffectHit_png,EffectHit_json",
+			"keys": "description_json,UI_png,UI_json,button_down_png,button_up_png,checkbox_select_disabled_png,checkbox_select_down_png,checkbox_select_up_png,checkbox_unselect_png,border_png,header_png,gameplay_json,BirdYellow_png,BirdYellow_json,AudioJump_mp3,AudioHit_mp3,AudioDie_mp3,AudioScore_mp3,AudioSwitch_mp3,EffectHit_png,EffectHit_json,EffectWhite_png",
 			"name": "preload"
 		}
 	],
@@ -112,6 +112,11 @@
 			"name": "EffectHit_json",
 			"type": "json",
 			"url": "assets/Effect/EffectHit.json"
+		},
+		{
+			"name": "EffectWhite_png",
+			"type": "image",
+			"url": "assets/Effect/EffectWhite.png"
 		}
 	]
 }

@@ -18,7 +18,7 @@ module GameDefine
 	export var BirdFlyTime 		: number = 300;
 	export var BirdFlyHeight 	: number = 50;
 	export var BirdX 			: number = 50;
-	export var BirdY 			: number = 150;
+	export var BirdY 			: number = 200;
 
 	export var P2Factor 		: number = 50;
 

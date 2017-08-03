@@ -31,8 +31,7 @@ class UIGamePlay extends UIBase
 
 		GamePlay.Instance().OnAddScore();
 
-		var sound:egret.Sound = RES.getRes("AudioScore_mp3");
-        sound.play(0, 1);
+		SoundManage.Instance().Play("AudioScore_mp3");
 	}
 
 	private OnTap() : void

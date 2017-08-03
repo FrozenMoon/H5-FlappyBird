@@ -19,6 +19,8 @@ module GlobalConfig {
 	//是否在线
 	export var isOnLine:boolean = navigator.onLine;
 
+	export var isSound : boolean = true;
+
 	//全局字体颜色表--可以扩展
 	export var TextColors = {
 		white:0xFFFFFF,//白色

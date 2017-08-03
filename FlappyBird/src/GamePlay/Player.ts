@@ -21,7 +21,7 @@ class Player
         this.m_mc.play(-1);
         this.SetPos(GameDefine.BirdX, GameDefine.BirdY);
 
-        Functions.AddEventListener(GameEvents.TAP_BIRD, this.OnTap, this);
+        Functions.AddEventListener(GameEvents.TAP_BIRD, this.Jump, this);
 	}
 
 	public SetPos(x : number, y : number) : void
@@ -35,17 +35,20 @@ class Player
         return this.m_mc;
     }
 
-    public OnTap() : void
+    public Jump() : void
     {
         this.m_isFly = true;
         egret.Tween.removeTweens(this.m_mc);
 
         let tw1 = egret.Tween.get(this.m_mc);
-        tw1.to( { y : this.m_mc.y - GameDefine.BirdFlyHeight, rotation: -45}, GameDefine.BirdFlyTime);
-        
+        tw1.to( { y : this.m_mc.y - GameDefine.BirdFlyHeight, rotation: -45}, GameDefine.BirdFlyTime).call(this.onComplete2,this);
         GamePlay.Instance().m_TimeDrop = 0;
 
-        var sound:egret.Sound = RES.getRes("AudioJump_mp3");
-        sound.play(0, 1);
+        SoundManage.Instance().Play("AudioJump_mp3");
+    }
+
+    private onComplete2() : void
+    {
+
     }
 }
