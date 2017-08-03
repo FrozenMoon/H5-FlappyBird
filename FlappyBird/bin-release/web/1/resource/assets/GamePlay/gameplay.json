@@ -1,6 +1,0 @@
-{"file":"gameplay.png","frames":{
-"pipe_up":{"x":586,"y":326,"w":52,"h":320,"offX":0,"offY":0,"sourceW":52,"sourceH":320},
-"pipe_down":{"x":926,"y":2,"w":52,"h":320,"offX":0,"offY":0,"sourceW":52,"sourceH":320},
-"land":{"x":586,"y":2,"w":336,"h":112,"offX":0,"offY":0,"sourceW":336,"sourceH":112},
-"bg_night":{"x":294,"y":2,"w":288,"h":512,"offX":0,"offY":0,"sourceW":288,"sourceH":512},
-"bg_day":{"x":2,"y":2,"w":288,"h":512,"offX":0,"offY":0,"sourceW":288,"sourceH":512}}}
