@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "description_json,UI_png,UI_json,button_down_png,button_up_png,checkbox_select_disabled_png,checkbox_select_down_png,checkbox_select_up_png,checkbox_unselect_png,selected_png,border_png,header_png,thumb_pb_png,track_pb_png,radiobutton_select_disabled_png,radiobutton_select_down_png,radiobutton_select_up_png,radiobutton_unselect_png,roundthumb_png,track_sb_png,thumb_png,track_png,tracklight_png,handle_png,off_png,on_png,gameplay_json,BirdYellow_png,BirdYellow_json,AudioJump_mp3,AudioHit_mp3,AudioDie_mp3,AudioScore_mp3,AudioSwitch_mp3,EffectHit_png,EffectHit_json",
+			"keys": "description_json,UI_png,UI_json,button_down_png,button_up_png,checkbox_select_disabled_png,checkbox_select_down_png,checkbox_select_up_png,checkbox_unselect_png,border_png,header_png,gameplay_json,BirdYellow_png,BirdYellow_json,AudioJump_mp3,AudioHit_mp3,AudioDie_mp3,AudioScore_mp3,AudioSwitch_mp3,EffectHit_png,EffectHit_json",
 			"name": "preload"
 		}
 	],
@@ -53,11 +53,6 @@
 			"name": "checkbox_unselect_png"
 		},
 		{
-			"url": "assets/Default/ItemRenderer/selected.png",
-			"type": "image",
-			"name": "selected_png"
-		},
-		{
 			"url": "assets/Default/Panel/border.png",
 			"type": "image",
 			"name": "border_png"
@@ -66,76 +61,6 @@
 			"url": "assets/Default/Panel/header.png",
 			"type": "image",
 			"name": "header_png"
-		},
-		{
-			"url": "assets/Default/ProgressBar/thumb_pb.png",
-			"type": "image",
-			"name": "thumb_pb_png"
-		},
-		{
-			"url": "assets/Default/ProgressBar/track_pb.png",
-			"type": "image",
-			"name": "track_pb_png"
-		},
-		{
-			"url": "assets/Default/RadioButton/radiobutton_select_disabled.png",
-			"type": "image",
-			"name": "radiobutton_select_disabled_png"
-		},
-		{
-			"url": "assets/Default/RadioButton/radiobutton_select_down.png",
-			"type": "image",
-			"name": "radiobutton_select_down_png"
-		},
-		{
-			"url": "assets/Default/RadioButton/radiobutton_select_up.png",
-			"type": "image",
-			"name": "radiobutton_select_up_png"
-		},
-		{
-			"url": "assets/Default/RadioButton/radiobutton_unselect.png",
-			"type": "image",
-			"name": "radiobutton_unselect_png"
-		},
-		{
-			"url": "assets/Default/ScrollBar/roundthumb.png",
-			"type": "image",
-			"name": "roundthumb_png"
-		},
-		{
-			"url": "assets/Default/ScrollBar/track_sb.png",
-			"type": "image",
-			"name": "track_sb_png"
-		},
-		{
-			"url": "assets/Default/Slider/thumb.png",
-			"type": "image",
-			"name": "thumb_png"
-		},
-		{
-			"url": "assets/Default/Slider/track.png",
-			"type": "image",
-			"name": "track_png"
-		},
-		{
-			"url": "assets/Default/Slider/tracklight.png",
-			"type": "image",
-			"name": "tracklight_png"
-		},
-		{
-			"url": "assets/Default/ToggleSwitch/handle.png",
-			"type": "image",
-			"name": "handle_png"
-		},
-		{
-			"url": "assets/Default/ToggleSwitch/off.png",
-			"type": "image",
-			"name": "off_png"
-		},
-		{
-			"url": "assets/Default/ToggleSwitch/on.png",
-			"type": "image",
-			"name": "on_png"
 		},
 		{
 			"url": "assets/GamePlay/gameplay.json",
