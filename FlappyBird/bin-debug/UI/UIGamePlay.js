@@ -19,6 +19,7 @@ var UIGamePlay = (function (_super) {
     };
     UIGamePlay.prototype.OnOpen = function () {
         this.m_LabelScore.text = "0";
+        this.m_Type = 0;
     };
     UIGamePlay.prototype.OnAddScore = function (event) {
         var nAddType = event.param;

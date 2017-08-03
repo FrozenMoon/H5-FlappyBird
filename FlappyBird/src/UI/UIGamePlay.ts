@@ -14,6 +14,7 @@ class UIGamePlay extends UIBase
 	public OnOpen() : void
 	{
 		this.m_LabelScore.text = "0";
+		this.m_Type = 0;
 	}
 
 	private OnAddScore(event) : void

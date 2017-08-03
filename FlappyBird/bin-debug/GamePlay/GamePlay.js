@@ -85,6 +85,7 @@ var GamePlay = (function (_super) {
         else {
             this.m_Player.GetMC().play(-1);
             this.m_Player.SetPos(GameDefine.BirdX, GameDefine.BirdY);
+            this.m_Player.GetMC().rotation = 0;
         }
         // 水管
         if (this.m_Pipes[1] == null) {
@@ -115,9 +116,19 @@ var GamePlay = (function (_super) {
         Functions.DispatchEvent(UIEvents.OPEN_PANEL, UIDefine.PanelID.UIGamePlay);
     };
     GamePlay.prototype.OnGameOver = function () {
+        var _this = this;
         this.m_GameState = GameDefine.GAME_STATE.GameOver;
         var sound = RES.getRes("AudioHit_mp3");
         sound.play(0, 1);
+        // 碰撞特效
+        var mcHit = MCFactory.Instance().getMovieClip("EffectHit_json", "EffectHit_png", "EffectHit");
+        mcHit.x = this.m_Player.GetMC().x;
+        mcHit.y = this.m_Player.GetMC().y;
+        mcHit.scaleX = 2;
+        mcHit.scaleY = 2;
+        this.addChild(mcHit);
+        mcHit.play(1);
+        mcHit.addEventListener(egret.Event.COMPLETE, function () { _this.removeChild(mcHit); }, this);
         this.m_Player.GetMC().stop();
         egret.Tween.pauseTweens(this.m_Land_1);
         egret.Tween.pauseTweens(this.m_Land_2);
@@ -143,12 +154,12 @@ var GamePlay = (function (_super) {
             var birdY = this.m_Player.GetMC().y;
             var birdX = this.m_Player.GetMC().x;
             this.BirdMove();
-            var birdMaxY = this.m_Land_1.y - this.m_Player.GetMC().height - 10;
+            var birdMaxY = this.m_Land_1.y - this.m_Player.GetMC().height / 2;
             if (birdY >= birdMaxY) {
                 Functions.DispatchEvent(GameEvents.GAME_OVER);
             }
             // 碰撞柱子
-            var rectBird = new egret.Rectangle(birdX, birdY, this.m_Player.GetMC().width, this.m_Player.GetMC().height);
+            var rectBird = new egret.Rectangle(birdX - this.m_Player.GetMC().width / 2, birdY - this.m_Player.GetMC().height / 2, this.m_Player.GetMC().width, this.m_Player.GetMC().height);
             for (var i = 1; i <= this.m_PipesCount; ++i) {
                 var isCrash = this.CheckPipeCrash(rectBird, this.m_Pipes[i]);
                 if (isCrash) {
@@ -188,11 +199,14 @@ var GamePlay = (function (_super) {
         var birdX = this.m_Player.GetMC().x;
         this.m_TimeDrop += this.m_TimeScale;
         birdY += (this.m_TimeDrop / 800) * (this.m_TimeDrop / 800) * 9.8 / 2;
-        var birdMaxY = this.m_Land_1.y - this.m_Player.GetMC().height - 10;
+        var birdMaxY = this.m_Land_1.y - this.m_Player.GetMC().height / 2;
         if (birdY >= birdMaxY) {
             birdY = birdMaxY;
         }
         this.m_Player.SetPos(birdX, birdY);
+        var rotation = this.m_Player.GetMC().rotation + 0.1 * this.m_TimeScale;
+        rotation = Math.min(70, rotation);
+        this.m_Player.GetMC().rotation = rotation;
     };
     GamePlay.prototype.PipeMove = function (indexPipe) {
         this.m_Pipes[indexPipe].x -= this.m_TimeScale * GameDefine.PipeMoveSpeed;

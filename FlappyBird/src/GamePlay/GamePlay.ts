@@ -117,6 +117,7 @@ class GamePlay extends egret.DisplayObjectContainer　
 		{
 			this.m_Player.GetMC().play(-1);
 			this.m_Player.SetPos(GameDefine.BirdX, GameDefine.BirdY);
+			this.m_Player.GetMC().rotation = 0;
 		}
 		
 		// 水管
@@ -166,6 +167,16 @@ class GamePlay extends egret.DisplayObjectContainer　
 		var sound:egret.Sound = RES.getRes("AudioHit_mp3");
         sound.play(0, 1);
 
+		// 碰撞特效
+		var mcHit = MCFactory.Instance().getMovieClip("EffectHit_json", "EffectHit_png", "EffectHit");
+		mcHit.x = this.m_Player.GetMC().x;
+		mcHit.y = this.m_Player.GetMC().y;
+		mcHit.scaleX = 2;
+		mcHit.scaleY = 2;
+        this.addChild(mcHit);
+        mcHit.play(1);
+		mcHit.addEventListener(egret.Event.COMPLETE, () =>{this.removeChild(mcHit);}, this);
+
 		this.m_Player.GetMC().stop();
 		egret.Tween.pauseTweens(this.m_Land_1);
 		egret.Tween.pauseTweens(this.m_Land_2);
@@ -203,14 +214,14 @@ class GamePlay extends egret.DisplayObjectContainer　
 			var birdX = this.m_Player.GetMC().x;
 			this.BirdMove();
 
-			var birdMaxY = this.m_Land_1.y - this.m_Player.GetMC().height - 10;
+			var birdMaxY = this.m_Land_1.y - this.m_Player.GetMC().height / 2;
 			if (birdY >= birdMaxY)
 			{
 				Functions.DispatchEvent(GameEvents.GAME_OVER);
 			}
 
 			// 碰撞柱子
-			var rectBird : egret.Rectangle = new egret.Rectangle(birdX, birdY, this.m_Player.GetMC().width, this.m_Player.GetMC().height);
+			var rectBird : egret.Rectangle = new egret.Rectangle(birdX - this.m_Player.GetMC().width / 2, birdY - this.m_Player.GetMC().height / 2, this.m_Player.GetMC().width, this.m_Player.GetMC().height);
 			for (let i = 1; i <= this.m_PipesCount; ++i)
 			{
 				var isCrash = this.CheckPipeCrash(rectBird, this.m_Pipes[i]);
@@ -265,12 +276,16 @@ class GamePlay extends egret.DisplayObjectContainer　
 		var birdX = this.m_Player.GetMC().x;
 		this.m_TimeDrop += this.m_TimeScale;
 		birdY += (this.m_TimeDrop / 800) * (this.m_TimeDrop / 800) * 9.8 / 2 ;
-		var birdMaxY = this.m_Land_1.y - this.m_Player.GetMC().height - 10;
+		var birdMaxY = this.m_Land_1.y - this.m_Player.GetMC().height / 2;
 		if (birdY >= birdMaxY)
 		{
 			birdY = birdMaxY;
 		}
 		this.m_Player.SetPos(birdX, birdY);
+
+		var rotation = this.m_Player.GetMC().rotation + 0.1 * this.m_TimeScale;
+		rotation = Math.min(70, rotation);
+		this.m_Player.GetMC().rotation = rotation;
 	}
 
 	private PipeMove(indexPipe : number) : void
