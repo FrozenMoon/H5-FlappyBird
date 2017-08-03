@@ -89,5 +89,8 @@ class Player
         tw1.to( { y : this.m_mc.y - GameDefine.BirdFlyHeight}, GameDefine.BirdFlyTime);
         
         GamePlay.Instance().m_TimeDrop = 0;
+
+        var sound:egret.Sound = RES.getRes("AudioJump_mp3");
+        sound.play(0, 1);
     }
 }

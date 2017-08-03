@@ -13,6 +13,8 @@ class GamePlay extends egret.DisplayObjectContainer　
 	private m_Player			 : Player;
 	private m_pWorld			 : p2.World;	// TODO p2的使用不熟悉，以后再考虑加入
 	private m_debugDraw			 : p2DebugDraw;
+	public  m_MaxScore			 : number = 0;
+	public  m_NowScore			 : number = 0;
 
 	// 单例
 	private static m_instance : GamePlay;
@@ -42,6 +44,13 @@ class GamePlay extends egret.DisplayObjectContainer　
 		// TODO p2的使用不熟悉，以后再考虑加入
 		this.m_pWorld = new p2.World({gravity : [0, 9.82]});
 		this.m_pWorld.sleepMode = p2.World.BODY_SLEEPING;
+
+		
+	}
+
+	public OnAddScore() : void
+	{
+		this.m_NowScore += 1;
 	}
 
 	public AddWorld(body : p2.Body) : void
@@ -91,6 +100,8 @@ class GamePlay extends egret.DisplayObjectContainer　
 	private OnGameReady() : void 
 	{
 		this.m_GameState = GameDefine.GAME_STATE.GameReady;
+		this.m_MaxScore = Math.max(this.m_NowScore, Functions.readLocalNumberData(GameDefine.StoregeKeyMaxScore));
+		this.m_NowScore = 0;
 
 		Functions.DispatchEvent(UIEvents.CLOSE_PANEL, UIDefine.PanelID.UIGameStart);
 		Functions.DispatchEvent(UIEvents.CLOSE_PANEL, UIDefine.PanelID.UIGameOver);
@@ -152,6 +163,8 @@ class GamePlay extends egret.DisplayObjectContainer　
 	private OnGameOver() : void 
 	{
 		this.m_GameState = GameDefine.GAME_STATE.GameOver;
+		var sound:egret.Sound = RES.getRes("AudioHit_mp3");
+        sound.play(0, 1);
 
 		this.m_Player.GetMC().stop();
 		egret.Tween.pauseTweens(this.m_Land_1);

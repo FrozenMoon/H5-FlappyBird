@@ -19,6 +19,26 @@ module Functions {
         return result;
     }
 
+	 //写入数据
+    export function writeLocalData(key: string,value: string) {
+        egret.localStorage.setItem(key,value);
+    }
+    //读取数据
+    export function readLocalData(key: string,defaultValue?: string): string {
+        if(defaultValue == undefined || defaultValue == null) defaultValue = "";
+        var value = egret.localStorage.getItem(key);
+        return (value == "" || value == undefined || value == null) ? defaultValue : value;
+    }
+	export function readLocalNumberData(key: string,defaultValue?: number): number {
+        if(defaultValue == undefined || defaultValue == null) defaultValue = 0;
+        var value = egret.localStorage.getItem(key);
+		return (value == "" || value == undefined || value == null) ? defaultValue : parseInt(value);
+    }
+    //移除数据
+    export function removeLocalData(key:string){
+        egret.localStorage.removeItem(key);
+    }
+
 	//新建事件
 	export function Event(type:string, obj:Object = null, bubbles:boolean = false, cancelable:boolean = false):egret.Event
 	{ 

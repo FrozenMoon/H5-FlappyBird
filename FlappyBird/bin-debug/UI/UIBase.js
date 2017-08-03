@@ -28,6 +28,7 @@ var UIBase = (function (_super) {
     UIBase.prototype.Init = function () {
         this.m_inited = true;
         this.OnInit();
+        this.OnOpen();
     };
     UIBase.prototype.OnInit = function () {
     };

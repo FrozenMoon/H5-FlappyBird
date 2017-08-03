@@ -18,6 +18,31 @@ var Functions;
         return result;
     }
     Functions.createBitmapByName = createBitmapByName;
+    //写入数据
+    function writeLocalData(key, value) {
+        egret.localStorage.setItem(key, value);
+    }
+    Functions.writeLocalData = writeLocalData;
+    //读取数据
+    function readLocalData(key, defaultValue) {
+        if (defaultValue == undefined || defaultValue == null)
+            defaultValue = "";
+        var value = egret.localStorage.getItem(key);
+        return (value == "" || value == undefined || value == null) ? defaultValue : value;
+    }
+    Functions.readLocalData = readLocalData;
+    function readLocalNumberData(key, defaultValue) {
+        if (defaultValue == undefined || defaultValue == null)
+            defaultValue = 0;
+        var value = egret.localStorage.getItem(key);
+        return (value == "" || value == undefined || value == null) ? defaultValue : parseInt(value);
+    }
+    Functions.readLocalNumberData = readLocalNumberData;
+    //移除数据
+    function removeLocalData(key) {
+        egret.localStorage.removeItem(key);
+    }
+    Functions.removeLocalData = removeLocalData;
     //新建事件
     function Event(type, obj, bubbles, cancelable) {
         if (obj === void 0) { obj = null; }

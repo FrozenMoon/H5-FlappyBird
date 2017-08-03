@@ -61,6 +61,8 @@ var Player = (function () {
         var tw1 = egret.Tween.get(this.m_mc);
         tw1.to({ y: this.m_mc.y - GameDefine.BirdFlyHeight }, GameDefine.BirdFlyTime);
         GamePlay.Instance().m_TimeDrop = 0;
+        var sound = RES.getRes("AudioJump_mp3");
+        sound.play(0, 1);
     };
     return Player;
 }());

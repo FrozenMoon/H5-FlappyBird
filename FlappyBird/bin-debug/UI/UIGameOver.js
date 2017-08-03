@@ -14,6 +14,24 @@ var UIGameOver = (function (_super) {
     UIGameOver.prototype.OnInit = function () {
         this.m_BtnPlay.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onBtnPlay, this);
     };
+    UIGameOver.prototype.OnOpen = function () {
+        var maxScore = GamePlay.Instance().m_MaxScore;
+        var nowScore = GamePlay.Instance().m_NowScore;
+        this.m_LabelBest.text = String(nowScore + "->" + maxScore);
+        this.m_LabelScore.text = String(nowScore);
+        this.m_ImgNewScore.visible = nowScore > maxScore ? true : false;
+        this.m_ImgMedal.source = "UI_json.medals_0";
+        if (nowScore > 0)
+            this.m_ImgMedal.source = "UI_json.medals_1";
+        else if (nowScore > 10)
+            this.m_ImgMedal.source = "UI_json.medals_2";
+        else if (nowScore > 30)
+            this.m_ImgMedal.source = "UI_json.medals_3";
+        if (nowScore > maxScore)
+            Functions.writeLocalData(GameDefine.StoregeKeyMaxScore, String(nowScore));
+        var sound = RES.getRes("AudioDie_mp3");
+        sound.play(0, 1);
+    };
     UIGameOver.prototype.onBtnPlay = function () {
         Global.dispatchEvent(GameEvents.GAME_READY);
     };

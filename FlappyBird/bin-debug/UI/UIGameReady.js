@@ -14,6 +14,10 @@ var UIGameReady = (function (_super) {
     UIGameReady.prototype.OnInit = function () {
         this.addEventListener(egret.TouchEvent.TOUCH_TAP, this.OnGamePlay, this);
     };
+    UIGameReady.prototype.OnOpen = function () {
+        var sound = RES.getRes("AudioSwitch_mp3");
+        sound.play(0, 1);
+    };
     UIGameReady.prototype.OnGamePlay = function () {
         Functions.DispatchEvent(GameEvents.GAME_PLAY);
     };

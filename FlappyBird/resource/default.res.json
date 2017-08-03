@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "description_json,UI_png,UI_json,button_down_png,button_up_png,checkbox_select_disabled_png,checkbox_select_down_png,checkbox_select_up_png,checkbox_unselect_png,selected_png,border_png,header_png,thumb_pb_png,track_pb_png,radiobutton_select_disabled_png,radiobutton_select_down_png,radiobutton_select_up_png,radiobutton_unselect_png,roundthumb_png,track_sb_png,thumb_png,track_png,tracklight_png,handle_png,off_png,on_png,gameplay_json,BirdYellow_png,BirdYellow_json",
+			"keys": "description_json,UI_png,UI_json,button_down_png,button_up_png,checkbox_select_disabled_png,checkbox_select_down_png,checkbox_select_up_png,checkbox_unselect_png,selected_png,border_png,header_png,thumb_pb_png,track_pb_png,radiobutton_select_disabled_png,radiobutton_select_down_png,radiobutton_select_up_png,radiobutton_unselect_png,roundthumb_png,track_sb_png,thumb_png,track_png,tracklight_png,handle_png,off_png,on_png,gameplay_json,BirdYellow_png,BirdYellow_json,AudioJump_mp3,AudioHit_mp3,AudioDie_mp3,AudioScore_mp3,AudioSwitch_mp3",
 			"name": "preload"
 		}
 	],
@@ -144,14 +144,39 @@
 			"subkeys": "bg_day,bg_night,land,pipe_down,pipe_up"
 		},
 		{
-			"name": "BirdYellow_png",
+			"url": "assets/Animation/BirdYellow.png",
 			"type": "image",
-			"url": "assets/Animation/BirdYellow.png"
+			"name": "BirdYellow_png"
 		},
 		{
-			"name": "BirdYellow_json",
+			"url": "assets/Animation/BirdYellow.json",
 			"type": "json",
-			"url": "assets/Animation/BirdYellow.json"
+			"name": "BirdYellow_json"
+		},
+		{
+			"url": "assets/Audios/AudioJump.mp3",
+			"type": "sound",
+			"name": "AudioJump_mp3"
+		},
+		{
+			"url": "assets/Audios/AudioHit.mp3",
+			"type": "sound",
+			"name": "AudioHit_mp3"
+		},
+		{
+			"url": "assets/Audios/AudioDie.mp3",
+			"type": "sound",
+			"name": "AudioDie_mp3"
+		},
+		{
+			"url": "assets/Audios/AudioScore.mp3",
+			"type": "sound",
+			"name": "AudioScore_mp3"
+		},
+		{
+			"url": "assets/Audios/AudioSwitch.mp3",
+			"type": "sound",
+			"name": "AudioSwitch_mp3"
 		}
 	]
 }

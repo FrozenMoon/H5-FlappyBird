@@ -15,6 +15,8 @@ var GamePlay = (function (_super) {
         _this.m_LastTimeEnterFrame = 0;
         _this.m_PipesCount = 4;
         _this.m_Pipes = [];
+        _this.m_MaxScore = 0;
+        _this.m_NowScore = 0;
         return _this;
     }
     GamePlay.Instance = function () {
@@ -32,6 +34,9 @@ var GamePlay = (function (_super) {
         // TODO p2的使用不熟悉，以后再考虑加入
         this.m_pWorld = new p2.World({ gravity: [0, 9.82] });
         this.m_pWorld.sleepMode = p2.World.BODY_SLEEPING;
+    };
+    GamePlay.prototype.OnAddScore = function () {
+        this.m_NowScore += 1;
     };
     GamePlay.prototype.AddWorld = function (body) {
         this.m_pWorld.addBody(body);
@@ -67,6 +72,8 @@ var GamePlay = (function (_super) {
     };
     GamePlay.prototype.OnGameReady = function () {
         this.m_GameState = GameDefine.GAME_STATE.GameReady;
+        this.m_MaxScore = Math.max(this.m_NowScore, Functions.readLocalNumberData(GameDefine.StoregeKeyMaxScore));
+        this.m_NowScore = 0;
         Functions.DispatchEvent(UIEvents.CLOSE_PANEL, UIDefine.PanelID.UIGameStart);
         Functions.DispatchEvent(UIEvents.CLOSE_PANEL, UIDefine.PanelID.UIGameOver);
         Functions.DispatchEvent(UIEvents.OPEN_PANEL, UIDefine.PanelID.UIGameReady);
@@ -109,6 +116,8 @@ var GamePlay = (function (_super) {
     };
     GamePlay.prototype.OnGameOver = function () {
         this.m_GameState = GameDefine.GAME_STATE.GameOver;
+        var sound = RES.getRes("AudioHit_mp3");
+        sound.play(0, 1);
         this.m_Player.GetMC().stop();
         egret.Tween.pauseTweens(this.m_Land_1);
         egret.Tween.pauseTweens(this.m_Land_2);

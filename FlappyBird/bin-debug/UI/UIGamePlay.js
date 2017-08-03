@@ -16,7 +16,6 @@ var UIGamePlay = (function (_super) {
     UIGamePlay.prototype.OnInit = function () {
         Functions.AddEventListener(GameEvents.ADD_SCORE, this.OnAddScore, this);
         this.addEventListener(egret.TouchEvent.TOUCH_TAP, this.OnTap, this);
-        this.OnOpen();
     };
     UIGamePlay.prototype.OnOpen = function () {
         this.m_LabelScore.text = "0";
@@ -29,6 +28,9 @@ var UIGamePlay = (function (_super) {
         this.m_Type = nAddType;
         var nNowScore = parseInt(this.m_LabelScore.text);
         this.m_LabelScore.text = String(nNowScore + 1);
+        GamePlay.Instance().OnAddScore();
+        var sound = RES.getRes("AudioScore_mp3");
+        sound.play(0, 1);
     };
     UIGamePlay.prototype.OnTap = function () {
         Functions.DispatchEvent(GameEvents.TAP_BIRD);

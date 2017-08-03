@@ -9,8 +9,6 @@ class UIGamePlay extends UIBase
 	{
 		Functions.AddEventListener(GameEvents.ADD_SCORE, this.OnAddScore, this);
 		this.addEventListener(egret.TouchEvent.TOUCH_TAP, this.OnTap, this);
-
-		this.OnOpen();
 	}
 
 	public OnOpen() : void
@@ -29,6 +27,11 @@ class UIGamePlay extends UIBase
 
 		let nNowScore : number = parseInt(this.m_LabelScore.text);
 		this.m_LabelScore.text = String(nNowScore + 1);
+
+		GamePlay.Instance().OnAddScore();
+
+		var sound:egret.Sound = RES.getRes("AudioScore_mp3");
+        sound.play(0, 1);
 	}
 
 	private OnTap() : void

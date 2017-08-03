@@ -28,6 +28,7 @@ class UIBase extends eui.Component implements eui.UIComponent
 	{
 		this.m_inited = true;
 		this.OnInit();
+		this.OnOpen();
 	}
 	
 	protected OnInit() : void

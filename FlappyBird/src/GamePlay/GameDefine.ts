@@ -21,4 +21,19 @@ module GameDefine
 	export var BirdY 			: number = 150;
 
 	export var P2Factor 		: number = 50;
+
+	///////////////////////////////////////////
+	export var StoregeKeyMaxScore  : string = "StoregeKeyMaxScore";
+}
+
+module UIDefine 
+{
+	export enum PanelID 
+	{
+		UIGameStart = 1,
+		UIGameReady,
+		UIGamePlay,
+		UIGameOver,
+		Max,
+	}
 }
