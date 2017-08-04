@@ -77,6 +77,11 @@ class Main extends egret.DisplayObjectContainer
      */
     private onConfigComplete(event: RES.ResourceEvent): void 
     {
+        this.stage.scaleMode = egret.StageScaleMode.FIXED_WIDTH;
+        var systemType = GlobalConfig.systemType();
+        if (systemType == "windows" || systemType == "linux" || systemType == "ipad" || systemType == "mac")
+            this.stage.scaleMode = egret.StageScaleMode.SHOW_ALL;
+
         RES.removeEventListener(RES.ResourceEvent.CONFIG_COMPLETE, this.onConfigComplete, this);
         // load skin theme configuration file, you can manually modify the file. And replace the default skin.
         //加载皮肤主题配置文件,可以手动修改这个文件。替换默认皮肤。

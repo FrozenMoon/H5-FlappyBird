@@ -29,7 +29,7 @@ class UIGameOver extends UIBase
 		
 		if (nowScore > maxScore)
 		{
-			this.m_LabelBest.text = String(nowScore + "->" + maxScore);
+			this.m_LabelBest.text = String(nowScore);
 			this.m_ImgNewScore.visible = true;
 			this.m_ImgMedal.source = "UI_json.medals_3";
 			Functions.writeLocalData(GameDefine.StoregeKeyMaxScore, String(nowScore));

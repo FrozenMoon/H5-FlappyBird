@@ -1,13 +1,13 @@
 module GlobalConfig {
 	/*********************分享全局变量**********************/
 	//title
-	export var title:string = "";
+	export var title:string = "111";
 	//desc
-	export var desc:string = "";
+	export var desc:string = "111";
 	//link
-	export var link:string = "";
+	export var link:string = "111";
 	//imgUrl
-	export var imgUrl:string = "";
+	export var imgUrl:string = "111";
 	
 	//是否调试显示帧频
 	// 以下语句写在游戏初始化方法里
