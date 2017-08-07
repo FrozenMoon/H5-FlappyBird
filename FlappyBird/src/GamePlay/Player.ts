@@ -8,7 +8,6 @@ class Player
 	private m_mcTexturePath : string = "BirdYellow_png";
 	private m_mcJsonPath 	: string = "BirdYellow_json";
     private m_isFly         : boolean = false;
-    private m_body          : p2.Body;
 
 	public constructor() 
 	{

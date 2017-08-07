@@ -33,7 +33,7 @@ class Main extends egret.DisplayObjectContainer
      * 加载进度界面
      * loading process interface
      */
-    private loadingView: LoadingUI;
+    private loadingView: UILoading;
     private isThemeLoadEnd: boolean = false;
     private isResourceLoadEnd: boolean = false;
 
@@ -64,7 +64,7 @@ class Main extends egret.DisplayObjectContainer
         egret.registerImplementation("eui.IThemeAdapter", new ThemeAdapter());
         //Config loading process interface
         //设置加载进度界面
-        this.loadingView = new LoadingUI();
+        this.loadingView = new UILoading();
         this.addChild(this.loadingView);
         // initialize the Resource loading library
         //初始化Resource资源加载库

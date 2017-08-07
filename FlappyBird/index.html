@@ -1,9 +1,15 @@
+<?php
+require_once "wx/jssdk.php";
+$jssdk = new JSSDK("wx919b820f7381201c", "01731dfdbd92b944c4dc499ac850fbfe");
+$signPackage = $jssdk->GetSignPackage();
+?>
+
 <!DOCTYPE HTML>
 <html>
 
 <head>
     <meta charset="utf-8">
-    <title>Egret</title>
+    <title>飞翔的小鸟</title>
     <meta name="viewport" content="width=device-width,initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="full-screen" content="true" />
@@ -36,10 +42,18 @@
          data-show-fps-style="x:0,y:0,size:12,textColor:0xffffff,bgAlpha:0.9">
     </div>
 <script>
+    var wxInfo = {};
+    wxInfo.debug = false;
+    wxInfo.appId = '<?php echo $signPackage["appId"];?>';
+    wxInfo.timestamp = '<?php echo $signPackage["timestamp"];?>';
+    wxInfo.nonceStr = '<?php echo $signPackage["nonceStr"];?>';
+    wxInfo.signature = '<?php echo $signPackage["signature"];?>';
+
+    var version = "1.0.1";
     var loadScript = function (list, callback) {
         var loaded = 0;
         var loadNext = function () {
-            loadSingleScript(list[loaded], function () {
+            loadSingleScript(list[loaded] + "?v" + version, function () {
                 loaded++;
                 if (loaded >= list.length) {
                     callback();
@@ -78,7 +92,7 @@
              * "retina": //是否基于devicePixelRatio缩放画布
              * }
              **/
-            egret.runEgret({ renderMode: "webgl", audioType: 0 });
+            egret.runEgret({ renderMode: "webgl", audioType: 0 , antialias : true});
         });
     });
     xhr.send(null);

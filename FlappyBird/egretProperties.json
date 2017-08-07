@@ -33,8 +33,8 @@
 			"path": "./promise"
 		},
 		{
-			"name": "physics",
-			"path": "f:\\GitHub\\egret-game-library\\physics\\libsrc"
+			"name": "weixinapi",
+			"path": "f:\\GitHub\\egret-game-library\\weixinapi\\libsrc"
 		}
 	]
 }

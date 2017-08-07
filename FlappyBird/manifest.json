@@ -8,11 +8,11 @@
 		"libs/modules/tween/tween.js",
 		"libs/modules/dragonBones/dragonBones.js",
 		"promise/bin/promise.js",
-		"libs/modules/physics/physics.js"
+		"libs/modules/weixinapi/weixinapi.js"
 	],
 	"game": [
 		"bin-debug/UI/UIBase.js",
-		"bin-debug/Common/Utils/UtilsClass/BitmapBlink.js",
+		"bin-debug/Common/Utils/UtilsClass/LEvent.js",
 		"bin-debug/Common/Define/GlobalConfig.js",
 		"bin-debug/Common/Manager/GameManager.js",
 		"bin-debug/Common/Manager/SoundManage.js",
@@ -23,22 +23,22 @@
 		"bin-debug/Common/Utils/MCFactory.js",
 		"bin-debug/Common/Utils/md5.js",
 		"bin-debug/Common/Utils/NativeApi.js",
-		"bin-debug/Common/Utils/p2DebugDraw.js",
 		"bin-debug/Common/Utils/RegUtils.js",
+		"bin-debug/Common/Utils/UtilsClass/BitmapBlink.js",
 		"bin-debug/Common/Define/Event.js",
-		"bin-debug/Common/Utils/UtilsClass/LEvent.js",
 		"bin-debug/Common/Utils/UtilsClass/LListener.js",
 		"bin-debug/Common/Utils/UtilsClass/TipsUtils.js",
+		"bin-debug/Common/Utils/WeiXinApi.js",
 		"bin-debug/GamePlay/GameDefine.js",
 		"bin-debug/GamePlay/GamePlay.js",
 		"bin-debug/GamePlay/Player.js",
-		"bin-debug/LoadingUI.js",
 		"bin-debug/Main.js",
 		"bin-debug/ThemeAdapter.js",
 		"bin-debug/AssetAdapter.js",
 		"bin-debug/UI/UIGameOver.js",
 		"bin-debug/UI/UIGamePlay.js",
 		"bin-debug/UI/UIGameReady.js",
-		"bin-debug/UI/UIGameStart.js"
+		"bin-debug/UI/UIGameStart.js",
+		"bin-debug/UI/UILoading.js"
 	]
 }

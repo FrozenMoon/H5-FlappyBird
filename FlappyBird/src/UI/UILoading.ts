@@ -27,7 +27,7 @@
 //
 //////////////////////////////////////////////////////////////////////////////////////
 
-class LoadingUI extends egret.Sprite {
+class UILoading extends egret.Sprite {
 
     public constructor() {
         super();
@@ -47,7 +47,7 @@ class LoadingUI extends egret.Sprite {
 
     public setProgress(current:number, total:number):void 
     {
-        var percent = Math.floor(current / total);
+        var percent = Math.floor(current / total * 100);
         this.textField.text = `Loading...${percent}/100%`;
     }
 }

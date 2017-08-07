@@ -8312,7 +8312,6 @@ declare namespace eui {
          * 记录按下的对象，touchCancle时使用
          */
         private downTarget;
-        private tempStage;
         /**
          * @private
          *
