@@ -16,7 +16,7 @@ module GlobalConfig {
     // if(GameConfig.isDebug){
     //     egret.Profiler.getInstance().run();
     // }
-	export var isDebug : boolean = false;
+	export var isDebug : boolean = window["debug"];
 
 	//是否在线
 	export var isOnLine : boolean = navigator.onLine;
