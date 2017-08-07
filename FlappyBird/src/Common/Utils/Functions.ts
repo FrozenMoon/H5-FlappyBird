@@ -75,42 +75,19 @@ module Functions {
         var num = Min + Math.round(Rand * Range); //四舍五入       
         return num;
     }
-	
-	//多平台分享组件主要针对 微信、微博、qqzone、qq
-	//一键分享到新浪微博、腾讯微博、qq空间等代码
-	export function shareUtils(name:string):void
-	{ 
-		var title = GlobalConfig.desc;
-		var shareUrl = GlobalConfig.link;
-		var imgUrl = GlobalConfig.imgUrl;
-		var desc = GlobalConfig.title;
-		if(name == "weibo"){
-		    //分享到新浪微博
-			var url:string='http://v.t.sina.com.cn/share/share.php?title='+title+'&url='+shareUrl+'&content=utf-8&sourceUrl='+shareUrl+'&pic='+imgUrl;
-			window.open(url);
-		}else if(name == "txmicroblog"){
-			//分享到腾讯微博
-			var url:string='http://v.t.qq.com/share/share.php?title='+title+'&url='+shareUrl+'&pic='+imgUrl;
-			window.open(url);
-		}else if(name == "qzone"){
-			//分享到QQ空间
-			var url:string='http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?summary='+title+'&url='+shareUrl+'&pics='+imgUrl;
-			window.open(url);
-		}else if(name == "qq"){
-			var url:string='http://connect.qq.com/widget/shareqq/index.html?title='+title+'&url='+shareUrl+'&pic='+imgUrl;
-			window.open(url);
-		}else if(name == "renren"){//没有图片
-			var url='http://share.renren.com/share/buttonshare.do?link='+shareUrl+'&title='+title;
-			window.open(url);
-		}else if(name == "kaixin"){//没有图片   ---暂时不支持 用户量太低
-			var url='http://www.kaixin001.com/repaste/share.php?rurl='+shareUrl+'&rcontent='+title;
-			window.open(url);
-		}else if(name == "douban"){//没有图片
-			var url='http://www.douban.com/recommend/?url='+shareUrl+'&title='+title;
-			window.open(url);
-		}else if(name == "tieba"){
-			var url='http://tieba.baidu.com/f/commit/share/openShareApi?url='+shareUrl+'&title='+title;
-			window.open(url);
-		}
-	} 
+
+	/**
+    * 获取以当前时间戳为参数的版本控制
+    */
+    export function GetVersionByTime() {
+        var timestamp = new Date().getTime();
+		return "?v=" + String(timestamp);
+    }
+
+	/**
+    * 获取以当前版本号为参数的版本控制
+    */
+    export function GetVersionByVersion(Min, Max) {
+		return "?v=" + window["version"];
+    }
 }

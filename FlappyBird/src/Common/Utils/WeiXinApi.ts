@@ -33,7 +33,7 @@ class WeiXinApi extends egret.EventDispatcher{
     /**分享标题*/
     public title:string = "飞翔的小鸟";
     /**分享描述*/
-    public desc: string = "我已经打败了全球99%的小鸟，快来和我一起挑战吧！";
+    public desc: string = "我已经打败了全球98%的小鸟，快来和我一起挑战吧！";
     /**分享链接*/
     public link:string = "http://ec2-13-229-49-79.ap-southeast-1.compute.amazonaws.com/index.php";
     /**分享图片*/
@@ -94,9 +94,9 @@ class WeiXinApi extends egret.EventDispatcher{
     /**分享朋友圈*/
     private shareTimeLine(title:string){
         var body: BodyMenuShareTimeline = new BodyMenuShareTimeline();
-        body.title = title;
-        body.imgUrl = this.imgUrl;
-        body.link = this.link;
+        body.title = GlobalConfig.title;
+        body.imgUrl = GlobalConfig.imgUrl + Functions.GetVersionByTime();
+        body.link = GlobalConfig.linkUrl + Functions.GetVersionByTime();
         //分享成功
         body.success = function() {
             
@@ -115,12 +115,12 @@ class WeiXinApi extends egret.EventDispatcher{
     /**分享好友*/
     private shareAppMessage(title:string){
         var bodyFriend: BodyMenuShareAppMessage = new BodyMenuShareAppMessage();
-        bodyFriend.title = title;
-        bodyFriend.imgUrl = this.imgUrl;
-        bodyFriend.link = this.link;
-        bodyFriend.desc = this.desc;
+        bodyFriend.title = GlobalConfig.title;
+        bodyFriend.desc = GlobalConfig.desc;
+        bodyFriend.imgUrl = GlobalConfig.imgUrl + Functions.GetVersionByTime();
+        bodyFriend.link = GlobalConfig.linkUrl + Functions.GetVersionByTime();
         bodyFriend.success = function(){
-            GamePlay.Instance().PlayEffectWhite(1000);
+
         }
         wx.onMenuShareAppMessage(bodyFriend);
     }
@@ -128,12 +128,11 @@ class WeiXinApi extends egret.EventDispatcher{
     /**分享QQ空间*/
     private shareQQ(title:string){
         var bodyQQ:BodyMenuShareQQ = new BodyMenuShareQQ();
-        bodyQQ.title = title;
-        bodyQQ.desc = this.desc;
-        bodyQQ.link = this.link;
-        bodyQQ.imgUrl = this.imgUrl;
+        bodyQQ.title = GlobalConfig.title;
+        bodyQQ.desc = GlobalConfig.desc;
+        bodyQQ.link = GlobalConfig.linkUrl + Functions.GetVersionByTime();
+        bodyQQ.imgUrl = GlobalConfig.imgUrl + Functions.GetVersionByTime();
         bodyQQ.success = function() {
-            
         }
         wx.onMenuShareQQ(bodyQQ);
     }
@@ -141,10 +140,10 @@ class WeiXinApi extends egret.EventDispatcher{
     /**分享微博*/
     private shareWeiBo(title:string){
         var bodyWeiBo:BodyMenuShareWeibo = new BodyMenuShareWeibo();
-        bodyWeiBo.title = title;
-        bodyWeiBo.desc = this.desc;
-        bodyWeiBo.link = this.link;
-        bodyWeiBo.imgUrl = this.imgUrl;
+        bodyWeiBo.title = GlobalConfig.title;
+        bodyWeiBo.desc = GlobalConfig.desc;
+        bodyWeiBo.link = GlobalConfig.linkUrl + Functions.GetVersionByTime();
+        bodyWeiBo.imgUrl = GlobalConfig.imgUrl + Functions.GetVersionByTime();
         wx.onMenuShareWeibo(bodyWeiBo);
     }
     

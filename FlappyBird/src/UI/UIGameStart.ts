@@ -9,6 +9,6 @@ class UIGameStart extends UIBase
 
 	private onBtnPlay():void
 	{
-		Global.dispatchEvent(GameEvents.GAME_READY);
+		Functions.DispatchEvent(GameEvents.GAME_READY);
 	}
 }

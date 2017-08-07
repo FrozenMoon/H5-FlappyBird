@@ -19,8 +19,9 @@ class GameManager
 	{
 		// 初始化模块
         this.m_stage = stage;
-
+		var str1 = GlobalConfig.getCurUrl();
 		GamePlay.Instance().Init();
+		var str2 = Functions.GetVersionByTime();
 		this.m_stage.addChild(GamePlay.Instance());
 		
 		UIManager.Instance().Init();

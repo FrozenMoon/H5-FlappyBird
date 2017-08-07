@@ -54,10 +54,4 @@ module NativeApi {
 	export function sendMessage(telNum:number):void {
     	window.open("sms:"+telNum,'_self') 
     } 	
-
-	//获取当前地址
-	export function getCurUrl():string {
-		return window.location.href;
-    } 	
-
 }

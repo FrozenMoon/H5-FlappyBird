@@ -1,23 +1,25 @@
 module GlobalConfig {
 	/*********************分享全局变量**********************/
 	//title
-	export var title:string = "111";
+	export var title:string = "飞翔的小鸟";
 	//desc
-	export var desc:string = "111";
-	//link
-	export var link:string = "111";
-	//imgUrl
-	export var imgUrl:string = "111";
+	export var desc:string = "我已经打败了全球97%的小鸟，快来和我一起挑战吧";
+	// 根目录
+	export var rootUrl:string = "http://ec2-13-229-49-79.ap-southeast-1.compute.amazonaws.com/";
+	//link 根目录为当前地址
+	export var linkUrl:string = rootUrl + "index.php";
+	//imgUrl 根目录为当前地址
+	export var imgUrl:string = rootUrl + "icon.png";
 	
 	//是否调试显示帧频
 	// 以下语句写在游戏初始化方法里
     // if(GameConfig.isDebug){
     //     egret.Profiler.getInstance().run();
     // }
-	export var isDebug:boolean = false;
+	export var isDebug : boolean = false;
 
 	//是否在线
-	export var isOnLine:boolean = navigator.onLine;
+	export var isOnLine : boolean = navigator.onLine;
 
 	export var isSound : boolean = true;
 
@@ -137,32 +139,10 @@ module GlobalConfig {
 		}else{
 			return true;
 		}
-	} 
+	}
 
-    /**----------------------------------FAQ:-----------------------------*/
-
-	// 横屏解决方法 by 张宇
-	// http://bbs.egret-labs.org/thread-529-1-1.html
-
-	//声音解决方法 by east
-	// http://bbs.egret-labs.org/forum.php?mod=viewthread&tid=386&pid=1770&page=1&extra=#pid1770
-
-	//js调用ts的方法
-	// document_class 查看egretProperties
-	// 在egret_loader中有如下代码：
-	// var rootClass;
-	// if(document_class){
-	//     rootClass = egret.getDefinitionByName(document_class);
-	// }
-	// var rootContainer = new rootClass();
-	// rootContainer就是主ts中的this
-	// 在index中直接调用rootContainer就ok了
-
-	//ts调用js的方法
-	// 使用如下方法：
-	// window["_smq"]
-
-	//上传图片
-	// http://a3147972.blog.51cto.com/2366547/1551066
-	
+	//获取当前地址
+	export function getCurUrl():string {
+		return window.location.hostname;
+    } 	
 }
