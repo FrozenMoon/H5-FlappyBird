@@ -44,6 +44,9 @@ class UIManager extends eui.UILayer
 				case UIDefine.PanelID.UIGameOver:
 					this.m_uiPanels[id] = new UIGameOver;
 					break;
+				case UIDefine.PanelID.UIGameShare:
+					this.m_uiPanels[id] = new UIGameShare;
+					break;
 			}
 		}
 

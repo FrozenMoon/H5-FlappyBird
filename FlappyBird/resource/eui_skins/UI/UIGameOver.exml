@@ -4,16 +4,17 @@
 	<e:Image source="UI_json.text_game_over" horizontalCenter="0" verticalCenter="-146"/>
 	<e:Image id="m_ImgScorePanel" source="UI_json.score_panel" horizontalCenter="0" verticalCenter="-32"/>
 	<e:Label id="m_LabelBest" text="999" x="160" y="242" size="24" anchorOffsetX="0" width="76" textAlign="right"/>
-	<e:Button id="m_BtnPlay" label="" horizontalCenter="0" verticalCenter="79">
+	<e:Button id="m_BtnPlay" label="" horizontalCenter="0" verticalCenter="125">
 		<e:skinName>
 			<e:Skin states="up,down,disabled">
 			<e:Image width="100%" height="100%" source="UI_json.button_play"/>
 			<e:Label id="labelDisplay" horizontalCenter="0" verticalCenter="0"/>
 			</e:Skin>
 		</e:skinName>
+
 	</e:Button>
 
-	<e:Button id="m_BtnShare" label="" horizontalCenter="0" verticalCenter="164">
+	<e:Button id="m_BtnShare" label="" horizontalCenter="0" verticalCenter="57">
 		<e:skinName>
 			<e:Skin states="up,down,disabled">
 			<e:Image width="100%" height="100%" source="UI_json.button_share"/>

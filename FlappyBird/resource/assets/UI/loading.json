@@ -1,0 +1,4 @@
+{"file":"loading.png","frames":{
+"processbar_bg":{"x":2,"y":1286,"w":486,"h":18,"offX":0,"offY":0,"sourceW":486,"sourceH":18},
+"processbar":{"x":492,"y":1286,"w":483,"h":18,"offX":3,"offY":0,"sourceW":486,"sourceH":18},
+"bg_loading":{"x":2,"y":2,"w":720,"h":1280,"offX":0,"offY":0,"sourceW":720,"sourceH":1280}}}

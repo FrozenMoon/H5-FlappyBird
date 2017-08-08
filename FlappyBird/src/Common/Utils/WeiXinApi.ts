@@ -30,15 +30,6 @@ class WeiXinApi extends egret.EventDispatcher{
     /**获取地理位置成功*/
     public static GET_LOCATION_SUCCESS: string = "GET_LOCATION_SUCCESS";
     
-    /**分享标题*/
-    public title:string = "飞翔的小鸟";
-    /**分享描述*/
-    public desc: string = "我已经打败了全球98%的小鸟，快来和我一起挑战吧！";
-    /**分享链接*/
-    public link:string = "http://ec2-13-229-49-79.ap-southeast-1.compute.amazonaws.com/index.php";
-    /**分享图片*/
-    public imgUrl: string = "http://ec2-13-229-49-79.ap-southeast-1.compute.amazonaws.com/icon.png";
-    
     private static instance:WeiXinApi;
     public static getInstance():WeiXinApi{
     	if(this.instance == null){
@@ -84,7 +75,8 @@ class WeiXinApi extends egret.EventDispatcher{
      * 设置分享内容
      * @title 分享标题(用于标题显示得分)
      */ 
-    public setShareContent(title:string = this.title){
+    public setShareContent(title:string = GlobalConfig.title)
+    {
         this.shareTimeLine(title);    //朋友圈
         this.shareAppMessage(title);  //好友
         this.shareQQ(title);          //QQ空间

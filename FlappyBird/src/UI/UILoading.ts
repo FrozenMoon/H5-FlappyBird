@@ -35,19 +35,42 @@ class UILoading extends egret.Sprite {
     }
 
     private textField : egret.TextField;
+    private processBar : ProcessBar;
 
     private createView() : void {
+        // bg
+        let bg : egret.Bitmap = Functions.createBitmapByName("loading_json.bg_loading");
+        bg.width = GlobalConfig.curWidth();
+        bg.height = GlobalConfig.curHeight();
+        bg.anchorOffsetX = 0;
+        bg.anchorOffsetY = 0;
+        this.addChild(bg);
+
+        // process
+        this.processBar = new ProcessBar(Functions.createBitmapByName("loading_json.processbar_bg"), Functions.createBitmapByName("loading_json.processbar"));
+        this.processBar.width = GlobalConfig.curWidth();
+        this.processBar.anchorOffsetX = 0;
+        this.processBar.anchorOffsetY = 1;
+        this.processBar.y = GlobalConfig.curHeight() - this.processBar.height;
+        this.addChild(this.processBar);
+
+        // text
         this.textField = new egret.TextField();
         this.addChild(this.textField);
-        this.textField.y = GlobalConfig.curHeight() / 2;
+        this.textField.y = GlobalConfig.curHeight() - 40;
+        this.textField.anchorOffsetX = 0;
+        this.textField.anchorOffsetY = 1;
         this.textField.width = GlobalConfig.curWidth();
-        this.textField.height = GlobalConfig.curHeight();
+        this.textField.height = 30;
         this.textField.textAlign = "center";
+        this.textField.size = 12;
     }
 
     public setProgress(current:number, total:number):void 
     {
         var percent = Math.floor(current / total * 100);
-        this.textField.text = `Loading...${percent}/100%`;
+        this.textField.text = `玩命加载中...${percent}/100%`;
+
+        this.processBar.setProgress(current / total);
     }
 }

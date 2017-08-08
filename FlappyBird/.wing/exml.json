@@ -26,5 +26,10 @@
         "path": "..\\resource\\eui_skins\\UI\\UIGameDeath.ts",
         "class": "UIGameDeath",
         "parentPath": ""
+    },
+    "15dc0746fa9": {
+        "path": "..\\resource\\eui_skins\\UI\\UIGameShare.ts",
+        "class": "UIGameShare",
+        "parentPath": ""
     }
 }

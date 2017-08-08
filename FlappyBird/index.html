@@ -1,9 +1,3 @@
-<?php
-require_once "wx/jssdk.php";
-$jssdk = new JSSDK("wx919b820f7381201c", "01731dfdbd92b944c4dc499ac850fbfe");
-$signPackage = $jssdk->GetSignPackage();
-?>
-
 <!DOCTYPE HTML>
 <html>
 
@@ -42,19 +36,22 @@ $signPackage = $jssdk->GetSignPackage();
          data-show-fps-style="x:0,y:0,size:12,textColor:0xffffff,bgAlpha:0.9">
     </div>
 <script>
+    // 发布改成false
     var debug = true;
-    var wxInfo = {};
-    wxInfo.debug = false;
-    wxInfo.appId = '<?php echo $signPackage["appId"];?>';
-    wxInfo.timestamp = '<?php echo $signPackage["timestamp"];?>';
-    wxInfo.nonceStr = '<?php echo $signPackage["nonceStr"];?>';
-    wxInfo.signature = '<?php echo $signPackage["signature"];?>';
 
     // 游戏版本号，控制脚本缓存
-    var version = "1.1.4";
+    var version = "1.1.5";
 
     if (!debug)
-    {
+    {   
+        var wxInfo = {};
+        // 这个debug开关只用于微信jssdk，一直关闭吧
+        wxInfo.debug = false;
+        wxInfo.appId = '<?php echo $signPackage["appId"];?>';
+        wxInfo.timestamp = '<?php echo $signPackage["timestamp"];?>';
+        wxInfo.nonceStr = '<?php echo $signPackage["nonceStr"];?>';
+        wxInfo.signature = '<?php echo $signPackage["signature"];?>';
+
         var _mtac = {};
         (function() {
             var mta = document.createElement("script");

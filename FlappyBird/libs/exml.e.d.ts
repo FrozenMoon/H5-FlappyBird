@@ -22,5 +22,7 @@ declare class UIGamePlaySkin extends eui.Skin{
 }
 declare class UIGameReadySkin extends eui.Skin{
 }
+declare class UIGameShareSkin extends eui.Skin{
+}
 declare class UIGameStartSkin extends eui.Skin{
 }

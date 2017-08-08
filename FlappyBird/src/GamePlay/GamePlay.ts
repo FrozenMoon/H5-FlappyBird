@@ -189,6 +189,9 @@ class GamePlay extends egret.DisplayObjectContainer　
 		var timer:egret.Timer = new egret.Timer(1000, 1);
 		timer.once(egret.TimerEvent.TIMER_COMPLETE, this.OnGameOverScore, this);
 		timer.start();
+
+		let gameTimes = Functions.readLocalNumberData(GameDefine.StoregeKeyGameTimes);
+		Functions.writeLocalData(GameDefine.StoregeKeyGameTimes, String(gameTimes + 1));
 	}
 	
 	private OnGameOverScore() : void 

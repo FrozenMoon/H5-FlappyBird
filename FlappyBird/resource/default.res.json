@@ -3,6 +3,10 @@
 		{
 			"keys": "description_json,UI_png,UI_json,button_down_png,button_up_png,checkbox_select_disabled_png,checkbox_select_down_png,checkbox_select_up_png,checkbox_unselect_png,border_png,header_png,gameplay_json,BirdYellow_png,BirdYellow_json,AudioJump_mp3,AudioHit_mp3,AudioDie_mp3,AudioScore_mp3,AudioSwitch_mp3,EffectHit_png,EffectHit_json,EffectWhite_png",
 			"name": "preload"
+		},
+		{
+			"keys": "loading_json",
+			"name": "loading"
 		}
 	],
 	"resources": [
@@ -20,7 +24,7 @@
 			"url": "assets/UI/UI.json",
 			"type": "sheet",
 			"name": "UI_json",
-			"subkeys": "button_menu,button_ok,button_pause,button_play,button_rate,button_resume,button_score,button_share,medals_0,medals_1,medals_2,medals_3,new,score_panel,text_game_over,text_ready,title,tutorial"
+			"subkeys": "button_menu,button_pause,button_play,button_resume,button_score,button_share,medals_0,medals_1,medals_2,medals_3,new,score_panel,share,text_game_over,text_ready,title,tutorial"
 		},
 		{
 			"url": "assets/Default/Button/button_down.png",
@@ -104,19 +108,25 @@
 			"name": "AudioSwitch_mp3"
 		},
 		{
-			"name": "EffectHit_png",
+			"url": "assets/Effect/EffectHit.png",
 			"type": "image",
-			"url": "assets/Effect/EffectHit.png"
+			"name": "EffectHit_png"
 		},
 		{
-			"name": "EffectHit_json",
+			"url": "assets/Effect/EffectHit.json",
 			"type": "json",
-			"url": "assets/Effect/EffectHit.json"
+			"name": "EffectHit_json"
 		},
 		{
-			"name": "EffectWhite_png",
+			"url": "assets/Effect/EffectWhite.png",
 			"type": "image",
-			"url": "assets/Effect/EffectWhite.png"
+			"name": "EffectWhite_png"
+		},
+		{
+			"url": "assets/UI/loading.json",
+			"type": "sheet",
+			"name": "loading_json",
+			"subkeys": "bg_loading,processbar,processbar_bg"
 		}
 	]
 }

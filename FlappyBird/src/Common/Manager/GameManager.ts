@@ -30,7 +30,8 @@ class GameManager
 		// 开始游戏
 		Functions.DispatchEvent(GameEvents.GAME_START);
 
-		WeiXinApi.getInstance().config(window["wxInfo"]);
+		if (!GlobalConfig.isDebug)
+			WeiXinApi.getInstance().config(window["wxInfo"]);
 	}
 
 	public GamePause() : void

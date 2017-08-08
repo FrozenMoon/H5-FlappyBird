@@ -16,14 +16,15 @@ module GameDefine
 	export var PipeMaxY 		: number = 370;
 
 	export var BirdFlyTime 		: number = 300;
-	export var BirdFlyHeight 	: number = 50;
+	export var BirdFlyHeight 	: number = 60;
 	export var BirdX 			: number = 50;
 	export var BirdY 			: number = 200;
 
-	export var P2Factor 		: number = 50;
+	export var ShareTimes       : number = 5;
 
 	///////////////////////////////////////////
 	export var StoregeKeyMaxScore  : string = "StoregeKeyMaxScore";
+	export var StoregeKeyGameTimes : string = "StoregeKeyGameTimes";
 }
 
 module UIDefine 
@@ -34,6 +35,7 @@ module UIDefine
 		UIGameReady,
 		UIGamePlay,
 		UIGameOver,
+		UIGameShare,
 		Max,
 	}
 }

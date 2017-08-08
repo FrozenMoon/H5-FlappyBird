@@ -3,13 +3,14 @@ class UIGameOver extends UIBase
 	private m_LabelBest 	: eui.Label;
 	private m_LabelScore 	: eui.Label;
 	private m_BtnPlay 		: eui.Button;
-	private m_BtnRank 		: eui.Button;
+	private m_BtnShare 		: eui.Button;
 	private m_ImgMedal 		: eui.Image;
 	private m_ImgNewScore 	: eui.Image;
 
 	protected OnInit() : void
 	{
 		this.m_BtnPlay.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onBtnPlay, this);
+		this.m_BtnShare.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onBtnShare, this);
 	}
 
 	public OnOpen() : void
@@ -42,10 +43,19 @@ class UIGameOver extends UIBase
 			
 		var sound:egret.Sound = RES.getRes("AudioDie_mp3");
         sound.play(0, 1);
+
+		let gameTimes = Functions.readLocalNumberData(GameDefine.StoregeKeyGameTimes);
+		if (gameTimes == GameDefine.ShareTimes)
+			this.onBtnShare();
 	}
 
 	private onBtnPlay() : void
 	{
 		Functions.DispatchEvent(GameEvents.GAME_READY);
+	}
+
+	private onBtnShare() : void
+	{
+		Functions.DispatchEvent(UIEvents.OPEN_PANEL, UIDefine.PanelID.UIGameShare);
 	}
 }

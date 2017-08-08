@@ -62,10 +62,7 @@ class Main extends egret.DisplayObjectContainer
         let assetAdapter = new AssetAdapter();
         egret.registerImplementation("eui.IAssetAdapter", assetAdapter);
         egret.registerImplementation("eui.IThemeAdapter", new ThemeAdapter());
-        //Config loading process interface
-        //设置加载进度界面
-        this.loadingView = new UILoading();
-        this.addChild(this.loadingView);
+    
         // initialize the Resource loading library
         //初始化Resource资源加载库
         RES.addEventListener(RES.ResourceEvent.CONFIG_COMPLETE, this.onConfigComplete, this);
@@ -92,7 +89,8 @@ class Main extends egret.DisplayObjectContainer
         RES.addEventListener(RES.ResourceEvent.GROUP_LOAD_ERROR, this.onResourceLoadError, this);
         RES.addEventListener(RES.ResourceEvent.GROUP_PROGRESS, this.onResourceProgress, this);
         RES.addEventListener(RES.ResourceEvent.ITEM_LOAD_ERROR, this.onItemLoadError, this);
-        RES.loadGroup("preload");
+        RES.loadGroup("loading", 1);
+        RES.loadGroup("preload", 0);
     }
     
     /**
@@ -111,7 +109,8 @@ class Main extends egret.DisplayObjectContainer
      */
     private onResourceLoadComplete(event: RES.ResourceEvent): void 
     {
-        if (event.groupName == "preload") {
+        if (event.groupName == "preload") 
+        {
             this.removeChild(this.loadingView);
             RES.removeEventListener(RES.ResourceEvent.GROUP_COMPLETE, this.onResourceLoadComplete, this);
             RES.removeEventListener(RES.ResourceEvent.GROUP_LOAD_ERROR, this.onResourceLoadError, this);
@@ -119,6 +118,13 @@ class Main extends egret.DisplayObjectContainer
             RES.removeEventListener(RES.ResourceEvent.ITEM_LOAD_ERROR, this.onItemLoadError, this);
             this.isResourceLoadEnd = true;
             this.createScene();
+        }
+        else if (event.groupName == "loading")
+        {
+            //Config loading process interface
+            //设置加载进度界面
+            this.loadingView = new UILoading();
+            this.addChild(this.loadingView);
         }
     }
     private createScene() 
