@@ -23,6 +23,9 @@ module GlobalConfig {
 
 	export var isSound : boolean = true;
 
+	// 全局字体 UI设计的时候也要选这个字体
+	export var defaultFont : string = "Microsoft YaHei";
+
 	//全局字体颜色表--可以扩展
 	export var TextColors = {
 		white:0xFFFFFF,//白色

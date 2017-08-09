@@ -3,7 +3,8 @@
 	<w:Config id="15dc0746fa9" ></w:Config>
 	<e:Group left="0" right="0" top="0" bottom="0">
 		<e:Rect left="0" right="0" top="0" bottom="0" fillAlpha="0.3"/>
-		<e:Label text="点击右上角\n分享到朋友圈\n好游戏一起嗨！" horizontalCenter="0" verticalCenter="-37.5" anchorOffsetX="0" width="174" fontFamily="Microsoft YaHei" anchorOffsetY="0" height="75" size="20" textAlign="center"/>
+		<e:Label text="点击右上角\n分享到朋友圈\n好游戏一起嗨！" horizontalCenter="0" verticalCenter="-37.5" anchorOffsetX="0" width="174" fontFamily="Microsoft YaHei" anchorOffsetY="0" height="75" size="22" textAlign="center"/>
 		<e:Image source="UI_json.share" x="121" y="0" anchorOffsetX="0" width="167" anchorOffsetY="0" height="194"/>
+		<e:BitmapLabel anchorOffsetX="0" anchorOffsetY="0" width="288" height="512" horizontalCenter="0" verticalCenter="0"/>
 	</e:Group>
 </e:Skin>

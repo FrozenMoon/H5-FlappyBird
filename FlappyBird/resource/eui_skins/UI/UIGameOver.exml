@@ -3,7 +3,7 @@
 	<w:Config id="15d73be1cdf" ></w:Config>
 	<e:Image source="UI_json.text_game_over" horizontalCenter="0" verticalCenter="-146"/>
 	<e:Image id="m_ImgScorePanel" source="UI_json.score_panel" horizontalCenter="0" verticalCenter="-32"/>
-	<e:Label id="m_LabelBest" text="999" x="160" y="242" size="24" anchorOffsetX="0" width="76" textAlign="right"/>
+	<e:Label id="m_LabelBest" text="999" x="160" y="242" size="24" anchorOffsetX="0" width="76" textAlign="right" fontFamily="Microsoft YaHei"/>
 	<e:Button id="m_BtnPlay" label="" horizontalCenter="0" verticalCenter="125">
 		<e:skinName>
 			<e:Skin states="up,down,disabled">
@@ -24,5 +24,5 @@
 	</e:Button>
 	<e:Image id="m_ImgMedal" source="UI_json.medals_0" horizontalCenter="-65" verticalCenter="-29"/>
 	<e:Image id="m_ImgNewScore" source="UI_json.new" horizontalCenter="33" verticalCenter="-29"/>
-	<e:Label id="m_LabelScore" text="999" x="161" y="196" size="24" anchorOffsetX="0" width="76" textAlign="right"/>
+	<e:Label id="m_LabelScore" text="999" x="161" y="196" size="24" anchorOffsetX="0" width="76" textAlign="right" fontFamily="Microsoft YaHei"/>
 </e:Skin>

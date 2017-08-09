@@ -63,13 +63,14 @@ class UILoading extends egret.Sprite {
         this.textField.width = GlobalConfig.curWidth();
         this.textField.height = 30;
         this.textField.textAlign = "center";
-        this.textField.size = 12;
+        this.textField.size = 14;
+        this.textField.fontFamily = GlobalConfig.defaultFont;
     }
 
     public setProgress(current:number, total:number):void 
     {
         var percent = Math.floor(current / total * 100);
-        this.textField.text = `玩命加载中...${percent}/100%`;
+        this.textField.text = `玩命加载中 ... ${percent} / 100%`;
 
         this.processBar.setProgress(current / total);
     }
