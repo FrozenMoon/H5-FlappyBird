@@ -1,6 +1,6 @@
  /**
 	* 游戏公用方法汇总
-	* by dily
+	* by dily modify by frozenmoon 201708
 	* (c) copyright 2014 - 2035
 	* All Rights Reserved. 
 	* 使用方法如：Global.setCookie()

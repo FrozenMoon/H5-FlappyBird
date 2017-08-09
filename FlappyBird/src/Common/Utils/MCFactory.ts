@@ -1,4 +1,4 @@
-// https://github.com/twem007/p1/blob/master/code/client/src/core/utils/MCFactory.ts
+// from https://github.com/twem007/p1/blob/master/code/client/src/core/utils/MCFactory.ts
 
 class MCFactory {
 

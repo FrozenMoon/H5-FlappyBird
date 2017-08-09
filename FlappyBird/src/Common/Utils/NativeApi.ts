@@ -1,6 +1,6 @@
   /**
 	* 调用原生api方法汇总
-	* by dily
+	* by dily modify by frozenmoon 201707
 	* (c) copyright 2014 - 2035
 	* All Rights Reserved. 
 	* 使用方法如：Global.setCookie()

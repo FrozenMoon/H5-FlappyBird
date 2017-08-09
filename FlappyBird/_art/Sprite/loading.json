@@ -1,4 +1,4 @@
 {"file":"loading.png","frames":{
-"processbar_bg":{"x":2,"y":1340,"w":486,"h":18,"offX":0,"offY":0,"sourceW":486,"sourceH":18},
-"processbar":{"x":492,"y":1340,"w":483,"h":18,"offX":3,"offY":0,"sourceW":486,"sourceH":18},
-"bg_loading":{"x":2,"y":2,"w":750,"h":1334,"offX":0,"offY":0,"sourceW":750,"sourceH":1334}}}
+"processbar_bg":{"x":2,"y":479,"w":486,"h":18,"offX":0,"offY":0,"sourceW":486,"sourceH":18},
+"processbar":{"x":492,"y":2,"w":483,"h":18,"offX":3,"offY":0,"sourceW":486,"sourceH":18},
+"bg_loading":{"x":2,"y":2,"w":296,"h":473,"offX":0,"offY":0,"sourceW":296,"sourceH":473}}}

@@ -5,7 +5,7 @@ module GlobalConfig {
 	//desc
 	export var desc:string = "我已经打败了全球97%的小鸟，快来和我一起挑战吧";
 	// 根目录
-	export var rootUrl:string = "http://ec2-13-229-49-79.ap-southeast-1.compute.amazonaws.com/";
+	export var rootUrl:string = "替换为你的分享地址，一般为你项目发布的地址";
 	//link 根目录为当前地址
 	export var linkUrl:string = rootUrl + "index.php";
 	//imgUrl 根目录为当前地址

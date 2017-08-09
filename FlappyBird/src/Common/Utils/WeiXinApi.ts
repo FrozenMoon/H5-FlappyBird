@@ -9,6 +9,7 @@
  * 3. 录音功能
  * 4. 音频识别
  * 5. 地理位置
+ * modify by frozenmoon 201707
  */
 class WeiXinApi extends egret.EventDispatcher{
     /**选择相册图片成功*/

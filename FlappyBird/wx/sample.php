@@ -1,6 +1,6 @@
 <?php
 require_once "jssdk.php";
-$jssdk = new JSSDK("wx919b820f7381201c", "01731dfdbd92b944c4dc499ac850fbfe");
+$jssdk = new JSSDK("替换成你的", "替换成你的");
 $signPackage = $jssdk->GetSignPackage();
 ?>
 <!DOCTYPE html>
@@ -44,7 +44,7 @@ $signPackage = $jssdk->GetSignPackage();
     wx.onMenuShareAppMessage({  
         title: 'title', // 分享标题  
         desc: 'desc', // 分享描述  
-        link: 'http://ec2-13-229-49-79.ap-southeast-1.compute.amazonaws.com/sample.php', // 分享链接  
+        link: '你的网址/sample.php', // 分享链接  
         imgUrl: 'https://pic1.zhimg.com/da8e974dc_s.jpg', // 分享图标  
         type: '', // 分享类型,music、video或link，不填默认为link  
         dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空  

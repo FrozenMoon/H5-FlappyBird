@@ -219,7 +219,7 @@ class GamePlay extends egret.DisplayObjectContainer　
 			this.BirdMove();
 
 			var birdMaxY = this.m_Land_1.y - this.m_Player.GetMC().height / 2;
-			if (birdY >= birdMaxY)
+			if (birdY >= birdMaxY || birdY <= 0)
 			{
 				Functions.DispatchEvent(GameEvents.GAME_OVER);
 			}
